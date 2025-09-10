@@ -27,17 +27,14 @@ If you get a permission denied error during install, right click the installer a
 
 ### Standard Package
 - Install Red Eclipse's dependencies.
-    - Debian/Ubuntu: `sudo apt-get install build-essential curl git libsdl2-2.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0 libopenal1 libsndfile1 zlib1g libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libopenal-dev libsndfile-dev zlib1g-dev`
-    - Fedora: `sudo dnf groupinstall "Development Tools" && sudo dnf install curl git SDL2 SDL2_image SDL2_mixer openal-soft libsndfile zlib SDL2-devel SDL2_image-devel SDL2_mixer-devel openal-soft-devel libsndfile-devel zlib-devel`
-    - Arch: `sudo pacman -S base-devel curl git sdl2 sdl2_image sdl2_mixer openal libsndfile zlib`
+    - Debian/Ubuntu: `sudo apt-get install curl libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-2.0-0`
+    - Fedora: `dnf install curl SDL2 SDL2_mixer SDL2_image`
 - [Download the tarball](/download/linux), move it to your home directory, and extract it with your file manager, an archive utility, or the terminal command `tar -jxvf redeclipse_X.Y.Z_nix.tar.bz2`.
 - Enter the extracted folder (redeclipse-X.Y.Z) and run `redeclipse.sh` to launch Red Eclipse.
 
 ### From Source
 - Install additional dependencies to compile with:
-    - Debian/Ubuntu: `sudo apt-get install build-essential curl git libsdl2-2.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0 libopenal1 libsndfile1 zlib1g libfreetype6 libx11-6 libgl1 libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libopenal-dev libsndfile-dev zlib1g-dev libfreetype-dev libx11-dev libgl1-mesa-dev`
-    - Fedora: `sudo dnf groupinstall "Development Tools" && sudo dnf install curl git SDL2 SDL2_image SDL2_mixer openal-soft libsndfile zlib freetype libX11 mesa-libGL SDL2-devel SDL2_image-devel SDL2_mixer-devel openal-soft-devel libsndfile-devel zlib-devel freetype-devel libX11-devel mesa-libGL-devel`
-    - Arch: `sudo pacman -S base-devel curl git sdl2 sdl2_image sdl2_mixer openal libsndfile zlib freetype2 libx11 mesa`
+    - Debian/Ubuntu: `sudo apt-get install libsdl2-mixer-dev libsdl2-image-dev libsdl2-dev libfreetype-dev libopenal-dev libsndfile-dev`
 
 From the command line:
 - Clone the repository and its submodules with `git clone --recurse-submodules https://github.com/redeclipse/base`
