@@ -1,27 +1,21 @@
 # Site settings
 title: Red Eclipse
 description: A free arena shooter featuring parkour
-#repository: redeclipse/redeclipse.github.io
-#organisation: redeclipse
-#website: https://redeclipse.net/
-#email: contact@redeclipse.net
-#github: [metadata]
-#locs:
-#  api: "https://api.github.com"
-#  ref: "https://github.com"
-
-
-# GitHub Pages deployment for test env
-#url: "https://dc-redeclipse.github.io"
-#baseurl: ""
-
+repository: redeclipse/redeclipse.github.io
+organisation: redeclipse
+website: https://redeclipse.net/
+email: contact@redeclipse.net
+github: [metadata]
+locs:
+  api: "https://api.github.com"
+  ref: "https://github.com"
 
 # Where things are
-#source: "."
-#collections_dir: "pages"
-#layouts_dir: "layouts"
-#data_dir: "data"
-#includes_dir: "includes"
+source: "."
+collections_dir: "pages"
+layouts_dir: "layouts"
+data_dir: "data"
+includes_dir: "includes"
 
 # Handling Reading
 exclude:
