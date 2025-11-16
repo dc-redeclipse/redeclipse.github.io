@@ -12,16 +12,16 @@ description: A free arena shooter featuring parkour
 
 
 # GitHub Pages deployment for test env
-url: "https://dc-redeclipse.github.io"
-baseurl: ""
+#url: "https://dc-redeclipse.github.io"
+#baseurl: ""
 
 
 # Where things are
-source: "."
-collections_dir: "pages"
-layouts_dir: "layouts"
-data_dir: "data"
-includes_dir: "includes"
+#source: "."
+#collections_dir: "pages"
+#layouts_dir: "layouts"
+#data_dir: "data"
+#includes_dir: "includes"
 
 # Handling Reading
 exclude:
