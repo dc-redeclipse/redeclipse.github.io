@@ -13,7 +13,7 @@ description: A free arena shooter featuring parkour
 
 # GitHub Pages deployment for test env
 url: "https://dc-redeclipse.github.io"
-baseurl: "/redeclipse.github.io"
+baseurl: "/."
 
 
 # Where things are
