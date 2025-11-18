@@ -5,41 +5,110 @@ permalink:
 redirect_from:
   - /home
 ---
-<div class="row main">
-    <div class="col-xs12 col-sm-12 col-md-6 pagehome">
-        <h2>A free <b>arena shooter</b></h1>
-        <h3>Fun for everyone, young and old, noob or expert</h3>
-        <h3>Available for Windows and Linux</h3>
-        <h3>Parkour, impulse boosts, dashing, and other tricks</h3>
-        <h3>A huge amount of mutators and game altering variables</h3>
-        <h3>Create maps with other players in realtime co-op edit</h3>
-        <h3>Over ten years of active development, and still going!</h3>
-        <div class="col-xs12 col-sm-12 col-md-12 btndownload">
-            <a href="/download" class="btn btn-primary">
-                <p class="download"><span class="fas fa-download" aria-hidden="true"></span> FREE DOWNLOAD</p>
-                <p class="version">v{{ site.data.game.version }} ({{ site.data.game.release }}) released {{ site.data.game.date }}</p>
+<style>
+  .lightboxOverlay, .ekko-lightbox .modal-content, .ekko-lightbox .modal-dialog {
+    background: #000 !important;
+  }
+  .ekko-lightbox .modal-content {
+    background-color: #000 !important;
+    box-shadow: none !important;
+    /* Removed: border: 1px solid red !important; */
+  }
+  .ekko-lightbox .modal-header { /* New rule to target the header border */
+    border-bottom-color: red !important;
+  }
+  .ekko-lightbox .close, .lightbox .close, .modal-header .close, .ekko-lightbox .modal-header .close {
+    color: #fff !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+  }
+  .main-headline {
+    text-align: center;
+    font-size: 2.8em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  .center-section {
+    text-align: center;
+  }
+  .center-section .btn.btn-primary {
+    width: auto !important;
+    min-width: 0;
+    display: inline-block;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+  .center-section h3 {
+    text-align: center;
+  }
+</style>
+
+<div class="center">
+    <a href="/steam"><img src="/bits/redeclipse-large.png" class="img-responsive" alt="Red Eclipse" style="margin:auto"></a>
+</div>
+
+<div class="center-section">
+    <h2 class="headline"><b>A free</b></h2>
+        <h1 class="main-headline"><b>arena shooter</b></h1>
+        <div class="center" style="padding:5px;">
+            <a href="/steam" class="btn btn-primary">
+                <p class="download" style="margin:0;">
+                    <span class="fab fa-steam" aria-hidden="true"></span> FREE DOWNLOAD
+                </p>
+                <p class="version" style="margin:0; font-size:12px;">
+                    v{{ site.data.game.version }} ({{ site.data.game.release }}) released {{ site.data.game.date }}
+                </p>
             </a>
         </div>
-    </div>
-    <div class="col-xs12 col-sm-12 col-md-6 video">
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ site.data.game.youtube }}?showinfo=0" frameborder="0" allowfullscreen></iframe>
-        </div>
+        <p class="version" style="margin:0; font-size:12px;">
+            <a href="/download">Install Red Eclipse without Steam</a></p>
+        </p>
+    <h3>Fun for everyone, young and old, noob or expert</h3>
+    <h3>Available for Windows and Linux</h3>
+    <h3>Parkour, impulse boosts, dashing, and other tricks</h3>
+    <h3>A huge amount of mutators and game altering variables</h3>
+    <h3>Create maps with other players in realtime co-op edit</h3>
+    <h3>Over {{ site.time | date: "%Y" | minus: 2009 }} years of active development, and still going!</h3>
+    <div class="center" style="padding:5px;">
+        <a href="/discord" class="btn btn-primary" style="background-color:#5865F2; border-color:#5865F2;">
+            <p class="download" style="margin:0;">
+                <span class="fab fa-discord" aria-hidden="true"></span> JOIN THE COMMUNITY
+            </p>
+            <p class="version" style="margin:0; font-size:12px;">
+                Chat with other players on Discord
+            </p>
+        </a>
     </div>
 </div>
+
+<!--
+FOR A NEW TRAILER
+<div class="col-xs12 col-sm-12 col-md-6 video">
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ site.data.game.youtube }}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+-->
+
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
         {% capture x %}{{ site.data.game.screenshots.pages | default: 20 }}{% endcapture %}
-        {% capture y %}{{ site.data.game.screenshots.items | default: 4 }}{% endcapture %}
+        {% assign items_per_slide = 1 %}
         {% for i in (0..x) %}
-        <div class="item{% if i == 0 %} active{% endif %} row">
-            {% for j in (1..y) %}
-            {% assign k = i | times: 4 | plus: j %}
-            {% assign m = k | prepend: '0' %}
-            {% assign n = m | size %}
-            {% if n <= 2 %}{% assign m = k | prepend: '00' %}{% endif %}
-            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/{{ m }}.jpg" alt="screenshot"></a>
-            {% endfor %}
+        <div class="item{% if i == 0 %} active{% endif %}">
+            <div class="row" style="margin:0; padding:0;">
+                {% for j in (1..items_per_slide) %}
+                {% assign k = i | times: items_per_slide | plus: j %}
+                {% assign m = k | prepend: '0' %}
+                {% assign n = m | size %}
+                {% if n <= 2 %}{% assign m = k | prepend: '00' %}{% endif %}
+                <div class="col-xs-12" style="padding:0; margin:0;">
+                    <a href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot">
+                        <img src="/bits/images/{{ m }}.jpg" alt="screenshot" style="width:100%; height:auto; display:block;">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -55,7 +124,7 @@ redirect_from:
 <div class="row texte">
     <div class="col-xs-12 col-sm-4 col-md-4">
         <p>{{ site.title }} is a fun-filled new take on the first person arena shooter, featuring parkour, impulse boosts, and more. The development is geared toward balanced gameplay, with a general theme of agility in a variety of environments. For more information, please see our <a href="/docs">Documentation</a>, <a href="/discord">Discord</a> or <a href="/discuss">Discussions</a>.</p>
-        <p>The project is a <i>Free and Open Source</i> game, built on <a href="http://cubeengine.com/">Cube Engine 2</a> using <a href="http://libsdl.org/">SDL</a> and <a href="http://opengl.org/">OpenGL</a> which allows it to be ported to many platforms; you can <a href="/download">download a package</a> for <i>Windows, GNU/Linux, BSD, and MacOS</i>, or <a href="/devel">grab a development</a> copy from our <a href="/github">GitHub</a> repository and live on the bleeding edge.</p>
+        <p>The project is a <i>Free and Open Source</i> game, built on <a href="http://cubeengine.com/">Cube Engine 2</a> using <a href="http://libsdl.org/">SDL 2</a> and <a href="http://opengl.org/">OpenGL</a> which allows it to be ported to many platforms; you can <a href="/download">download a package</a> for <i>Windows, GNU/Linux and BSD/i>, or <a href="/devel">grab a development</a> copy from our <a href="/github">GitHub</a> repository and live on the bleeding edge.</p>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-4">
         <p>In a true open source <i>"by the people, for the people"</i> nature, we try to work closely with our community and invite everyone to have their say to provide a better overall experience, aiming to create a game environment that is fun and easy to play, while still having elements to master.</p>
@@ -70,3 +139,19 @@ redirect_from:
         <a href="http://tesseract.gg/"><img src="/bits/tesseract.png" class="img-responsive img-tesseract" alt="Tesseract" style="margin:auto"></a>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var leftControl = document.querySelector('#carousel-example-generic .left.carousel-control');
+        var rightControl = document.querySelector('#carousel-example-generic .right.carousel-control');
+        if (leftControl) {
+            leftControl.addEventListener('mouseup', function() {
+                leftControl.blur();
+            });
+        }
+        if (rightControl) {
+            rightControl.addEventListener('mouseup', function() {
+                rightControl.blur();
+            });
+        }
+    });
+</script>
