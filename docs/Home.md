@@ -20,7 +20,6 @@ redirect_from:
 - **[Gameplay Guide](gameplay/Gameplay-Guide)** - Want to learn how to play? This is a good start.
 - **[Learn about the Weapons](gameplay/Weapons-Guide)** - Each weapon is unique, learn the pros and cons.
 - **[Tips and Tricks for using Parkour](gameplay/Parkour-Guide)** - Everyone loves running on walls, but there's more to learn.
-- **[Official Maps](Official-Maps)** - Descriptions and recommendations for the included levels.
 
 ## Server Administration
 - **[Server Setup](server-how-to/Server-Setup)** - How to configure and run a Red Eclipse server.
@@ -29,7 +28,6 @@ redirect_from:
 
 ## Map Editing
 - **[Editing Basics](editing/Basics)** - Learn how to start making your own maps in Red Eclipse.
-- **~~[Editing Reference](editing/Reference)~~** - A detailed explanation of the available editor features.
 
 ## Development
 - **[Version 2.0](Information-for-v2)** - Find out more about the upcoming **v2.0**, featuring [Tesseract](http://tesseract.gg/).
@@ -44,12 +42,9 @@ redirect_from:
 - **[Facebook Messenger](/messenger)** - Ask a quick question and we'll get back to you.
 - **[Issue Tracker](/issues)** - The place for bug reports and approved feature requests.
 - **[Contribution Guidelines](/contribute)** - See our rules and suggestions for contributing.
-- **[Game Statistics](/stats)** - The place to see statistics collected by our master server.
-- **[Server List](/servers)** - See a nice list of server and who's playing on them.
 - **[Official SubReddit](/reddit)** - The place to share with your fellow Reddit'ors.
-- **[GameJolt Page](/gamejolt)** - Leave us a review or use the GameJolt client to manage your game.
 - **[Facebook Page](/facebook)** - Get social with our Facebook page and share your review of the game.
 - **[YouTube Page](/youtube)** - The place to see Red Eclipse related videos and live streams.
 - **[GitHub Project](/github)** - We do all our development on GitHub, so this is the place to start when developing.
-- **[Subscribe via Patreon](/patreon)** - Pledge to our Patreon in order to help cover project costs.
+- **[Sponsor via Open Collective](/opencollective)** - Sponsor the project and help cover project costs.
 - **[Donate via PayPal](/paypal)** - Make a one-time or recurring donation to help cover project costs.

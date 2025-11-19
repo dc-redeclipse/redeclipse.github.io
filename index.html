@@ -21,15 +21,14 @@ redirect_from:
     opacity: 1 !important;
     text-shadow: none !important;
   }
-  /* New rule: Red glow on hover for the lightbox close button */
   .ekko-lightbox .close:hover, .lightbox .close:hover, .modal-header .close:hover, .ekko-lightbox .modal-header .close:hover {
     color: red !important;
     text-shadow: 0 0 5px red, 0 0 10px red !important;
   }
-  .navbar-static-top { /* Added rule to remove the margin below the navbar */
+  .navbar-static-top {
     margin-bottom: 0 !important;
   }
-  .pagecontent { /* Added rules to remove top margin and padding from the main content area */
+  .pagecontent {
     margin-top: 0 !important;
     padding-top: 0 !important;
   }
@@ -40,40 +39,34 @@ redirect_from:
     margin-bottom: 0.5em;
   }
   .center-section {
-    text-align: center; /* Keep text alignment for all content within this section */
+    text-align: center;
   }
-  /* New class for the section that should have the background image */
   .hero-section-background {
     background-image: url('/bits/bgtop.jpg');
-    /* Zoom in by 5% */
-    background-size: 150%; /* Makes the background image 105% of the container's width/height */
+    background-size: 150%;
     background-repeat: no-repeat;
     background-position: center center;
-    padding-top: 0px; /* Changed from 30px to 0px to remove space above image */
+    padding-top: 0px;
     padding-bottom: 30px;
     padding-left: 15px;
     padding-right: 15px;
-    /* Re-add transition for smoother mouse tracking movement */
     transition: background-position 0.1s ease-out;
   }
-  /* Style for the Red Eclipse logo */
   .center-section img[alt="Red Eclipse"] {
-    max-width: 60%; /* Increased max-width by 20% (50% * 1.20 = 60%) */
+    max-width: 60%;
     height: auto;
     display: block;
     margin: auto;
   }
-  /* Style for the "Install Red Eclipse without Steam" link */
   .center-section p.version a[href="/download"] {
-    color: #fff !important; /* Make text white by default */
-    text-shadow: none !important; /* Ensure no text shadow by default */
-    transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for color and shadow */
+    color: #fff !important;
+    text-shadow: none !important;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
   }
   .center-section p.version a[href="/download"]:hover {
-    color: #40E0D0 !important; /* Make text turquoise on hover */
-    text-shadow: 0 0 10px #40E0D0, 0 0 20px #40E0D0, 0 0 30px #40E0D0, 0 0 40px #40E0D0, 0 0 50px #40E0D0 !important; /* Turquoise glowing effect on hover */
+    color: #40E0D0 !important;
+    text-shadow: 0 0 10px #40E0D0, 0 0 20px #40E0D0, 0 0 30px #40E0D0, 0 0 40px #40E0D0, 0 0 50px #40E0D0 !important;
   }
-  /* Keyframes for the pulsing glow animation */
   @keyframes pulse-glow {
     0% {
       box-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red;
@@ -95,18 +88,18 @@ redirect_from:
       text-shadow: 0 0 20px red, 0 0 40px red, 0 0 60px red;
     }
   }
-  /* Styles to make the download button larger and its text responsive */
   a.btn-primary[href="/steam"] {
-    border-radius: 9999px; /* Make the button fully round */
-    /* Set a responsive base font-size, increased by an additional 30% */
+    border-radius: 9999px;
     font-size: clamp(1.56rem, 2.86vw, 2.58rem);
-    /* Use 'em' for padding so it scales with the font-size */
     padding: 0.8em 1.6em;
-    /* Add the pulsing glow animation */
     animation: pulse-glow 2s infinite ease-in-out;
   }
+  a.btn-primary[href="/steam"]:hover {
+    animation: none !important;
+    box-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red !important;
+  }
   a.btn-primary[href="/steam"] p {
-    margin: 0; /* Reset paragraph margins */
+    margin: 0;
   }
   a.btn-primary[href="/steam"] p.download, a.btn-primary[href="/steam"] p.version {
     animation: pulse-btn-color 2s infinite ease-in-out;
@@ -118,13 +111,18 @@ redirect_from:
     margin-bottom: 0.18em;
     transition: none;
   }
+  a.btn-primary[href="/steam"]:hover p.download, a.btn-primary[href="/steam"]:hover p.version {
+    animation: none !important;
+    color: #fff !important;
+    text-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red !important;
+  }
   a.btn-primary[href="/steam"] p.download {
-    font-size: 1.3em; /* Relative to parent 'a' tag's font-size */
+    font-size: 1.3em;
     font-weight: bold;
-    margin-bottom: 0.0em; /* Space between the two lines, reduced */
+    margin-bottom: 0.0em;
   }
   a.btn-primary[href="/steam"] p.version {
-    font-size: 0.58em; /* Relative to parent 'a' tag's font-size, made 30% smaller */
+    font-size: 0.58em;
   }
 
 /* BUTTON IN DISCORD COLOR */
@@ -135,113 +133,88 @@ redirect_from:
 /*  } */
     
   a.btn-primary[href="/discord"] p.version {
-    font-size: 0.9em; /* Made 20% larger */
+    font-size: 0.9em;
   }
-  /* New styles for the feature box */
   .feature-box {
-    background-color: rgba(0, 0, 0, 0.5); /* Light transparent black */
-    border-radius: 9999px; /* Made the border fully round */
-    padding: 20px; /* Padding inside the box */
-    margin: 20px auto; /* Center the box and add vertical margin */
-    max-width: 890px; /* Increased max-width by ~15% (600px * 1.15 = 690px), now set to 890px */
-    box-shadow: 0 0 3px red, 0 0 7px red, 0 0 14px red; /* Reduced Red glowing frame by ~30% */
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 9999px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 890px;
+    box-shadow: 0 0 3px red, 0 0 7px red, 0 0 14px red;
   }
-  .feature-box h2 { /* Changed from h3 to h2 */
-    color: #fff; /* Make text white for contrast against dark background */
-    margin-top: 0.0em; /* Adjust margins for h2 within the box, reduced */
+  .feature-box h2 {
+    color: #fff;
+    margin-top: 0.0em;
     margin-bottom: 0.2em;
-    font-weight: bold; /* Added to match the bold style of .main-headline */
-    letter-spacing: -0.05em; /* Reduced letter spacing */
-    /* Increased text-shadow for a much more intense red glow */
+    font-weight: bold;
+    letter-spacing: -0.05em;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
   }
-  /* New styles for a common content box */
   .content-box {
-    background-color: rgba(0, 0, 0, 0.3); /* A subtle transparent black background */
-    border-radius: 5px; /* Slightly rounded corners for a softer look */
-    padding: 15px; /* Add some padding inside the box */
-    margin-top: 20px; /* Add top margin to separate it from the row above */
-    box-shadow: 0 0 10.4px rgba(255, 0, 0, 0.39); /* Increased glow effect by ~30% */
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-    min-height: 170px; /* Set a minimum height, allowing boxes to grow */
-    display: flex; /* Use flexbox for internal content alignment */
-    flex-direction: column; /* Stack content vertically */
-    justify-content: flex-start; /* Align content to the top */
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 0 10.4px rgba(255, 0, 0, 0.39);
+    box-sizing: border-box;
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
   .content-box h4 {
-    margin-top: 0; /* Remove default top margin from the heading inside the box */
-    margin-bottom: 15px; /* Add bottom margin for spacing below the heading */
-    color: #fff; /* Ensure heading text is white for contrast */
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #fff;
   }
-
-  /* Make the "Support Us" text responsive and smaller */
   .support.content-box .donatemsg {
     font-size: clamp(1.2rem, 1vw, 1.65rem);
   }
-
-  /* Responsive text for donation links */
   .donate-text {
-    font-size: clamp(0.7rem, 1vw, 1.1rem); /* Responsive text size */
+    font-size: clamp(0.7rem, 1vw, 1.1rem);
   }
-
-  /* Responsive icons for donation links */
   .donate-icon {
     font-size: clamp(1.5rem, 2vw, 5.1rem);
   }
-
-  /* Red glow on hover for donation links */
   .donate.content-box a:hover {
     color: red !important;
     text-shadow: 0 0 5px red, 0 0 10px red !important;
   }
-
-/* Style for social icons in the footer */
 .row.texte .col-xs-12 > div[style="text-align: center; margin-top: 20px;"] a:hover {
-    color: red !important; /* Change the color to red on hover */
-    text-shadow: 0 0 5px red !important; /* Add a red text-shadow on hover */
+    color: red !important;
+    text-shadow: 0 0 5px red !important;
 }
-
-  /* Flexbox for equal height columns in the 'texte' row (still useful for horizontal alignment if columns aren't full width) */
   .row.texte {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 0 !important; /* Ensure no top margin on the text row */
+    margin-top: 0 !important;
   }
-  /* Adjust margin for columns to ensure they align properly within the flex row */
   .row.texte > [class*="col-"] {
-    margin-top: 0 !important; /* Added to explicitly remove top margin from columns */
-    margin-bottom: 20px; /* Keep bottom margin for spacing between rows if content wraps */
+    margin-top: 0 !important;
+    margin-bottom: 20px;
   }
-  /* Specific rule to remove top margin from the first paragraph in the first column of the text row */
   .row.texte > [class*="col-"]:first-child p:first-child {
       margin-top: 0 !important;
   }
-
-  /* Specific rule to remove bottom margin from the carousel */
   #carousel-example-generic {
     margin-bottom: 0 !important;
   }
-
-  /* Massive shadow for "A free" text - REMOVED GLOW */
   .center-section h2.headline {
     text-shadow: none !important;
-    margin-top: 100px; /* Replaces multiple <br> tags */
+    margin-top: 100px;
   }
-
-  /* Massive shadow for "arena shooter" text - REMOVED GLOW */
   .center-section h1.main-headline {
     text-shadow: none !important;
   }
-
-  /* Red glow on hover for carousel controls */
   .carousel-control:hover {
     color: red !important;
     text-shadow: 0 0 5px red, 0 0 10px red !important;
   }
 </style>
 <div class="center-section">
-    <div class="hero-section-background"> <!-- New div to contain the background image -->
+    <div class="hero-section-background">
         <a href="/steam"><img src="/bits/redeclipse-large.png" class="img-responsive" alt="Red Eclipse"></a>
         <div class="center" style="padding:5px;">
             <a href="/steam" class="btn btn-primary"><p class="download">
@@ -255,7 +228,7 @@ redirect_from:
         </p>
         <h2 class="headline"><b>A free</b></h2>
             <h1 class="main-headline"><b>arena shooter</b></h1>
-        <div class="feature-box"> <!-- New div for the transparent black box -->
+        <div class="feature-box">
             <h2>Accessible to everyone</h2>
             <h2>Available for Windows and Linux</h2>
             <h2>A movement system with a very high skill ceiling</h2>
@@ -273,7 +246,7 @@ redirect_from:
                 </p>
             </a>
         </div>
-    </div> <!-- End of the background image div -->
+    </div>
 </div>
 
 <!--
@@ -348,7 +321,7 @@ redirect_from:
         <a href="http://cubeengine.com/"><img src="/bits/cube2.png" class="img-responsive img-cube2" alt="Cube Engine 2" style="margin:auto"></a>
         <a href="http://tesseract.gg/"><img src="/bits/tesseract.png" class="img-responsive img-tesseract" alt="Tesseract" style="margin:auto"></a>
     </div>
-    <div class="col-xs-12"> <!-- New column to ensure it spans full width within the row -->
+    <div class="col-xs-12">
         <div style="text-align: center; margin-top: 20px;">
             <a href="/discord" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
                 <span class="fab fa-discord" aria-hidden="true" style="font-size: 3.4em;"></span>
@@ -382,35 +355,19 @@ redirect_from:
                 rightControl.blur();
             });
         }
-
         const heroSection = document.querySelector('.hero-section-background');
         if (heroSection) {
-            // Increased parallax amount for a more intense effect
-            const parallaxAmount = 30; // Max movement in pixels
-
-            // Listen for mouse movement across the entire document body
+            const parallaxAmount = 30;
             document.body.addEventListener('mousemove', (e) => {
-                // Get the dimensions of the hero section relative to the viewport
                 const rect = heroSection.getBoundingClientRect();
-                
-                // Calculate mouse position relative to the center of the viewport
                 const viewportCenterX = window.innerWidth / 2;
                 const viewportCenterY = window.innerHeight / 2;
-
-                // Normalize movement from -1 to 1 based on mouse position in the viewport
                 const normalizedX = (e.clientX - viewportCenterX) / viewportCenterX;
                 const normalizedY = (e.clientY - viewportCenterY) / viewportCenterY;
-
-                // Calculate the final background position offset
-                // Negative sign makes the background move opposite to the cursor, creating parallax
                 const offsetX = normalizedX * parallaxAmount;
                 const offsetY = normalizedY * parallaxAmount;
-
-                // Apply the new background position
                 heroSection.style.backgroundPosition = `calc(50% + ${-offsetX}px) calc(50% + ${-offsetY}px)`;
             });
-
-            // Reset background position when mouse leaves the document body (e.g., goes off browser window)
             document.body.addEventListener('mouseleave', () => {
                 heroSection.style.backgroundPosition = 'center center';
             });
