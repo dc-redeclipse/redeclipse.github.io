@@ -10,10 +10,6 @@ locs:
   api: "https://api.github.com"
   ref: "https://github.com"
 
-# FOR LOCAL TEST ONLY!
-url: "http://localhost:4000"
-baseurl: ""    # empty for local testing
-
 # Where things are
 source: "."
 collections_dir: "pages"
