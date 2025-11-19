@@ -43,7 +43,7 @@ redirect_from:
   }
   .hero-section-background {
     background-image: url('/bits/bgtop.jpg');
-    background-size: 150%;
+    background-size: 125%;
     background-repeat: no-repeat;
     background-position: center center;
     padding-top: 0px;
@@ -124,32 +124,62 @@ redirect_from:
   a.btn-primary[href="/steam"] p.version {
     font-size: 0.58em;
   }
-
-/* BUTTON IN DISCORD COLOR */
-/*    a.btn-primary[href="/discord"] {
-/*      background-color: #7289DA; /* Discord color */
-/*      border-color: #7289DA; /* Discord color */
-/*      transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
-/*  } */
-    
+    a.btn-primary[href="/discord"] {
+      background-color: #7289DA;
+      border-color: #7289DA;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
   a.btn-primary[href="/discord"] p.version {
     font-size: 0.9em;
   }
   .feature-box {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 9999px;
-    padding: 20px;
+    padding: 30px 20px;
     margin: 20px auto;
-    max-width: 890px;
+    max-width: 790px;
     box-shadow: 0 0 3px red, 0 0 7px red, 0 0 14px red;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .feature-box h2 {
     color: #fff;
     margin-top: 0.0em;
     margin-bottom: 0.2em;
     font-weight: bold;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.001em;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
+  }
+  .feature-box h3 {
+      color: #fff;
+      margin-top: 0.0em;
+      margin-bottom: 0.8em;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
+      font-size: clamp(1rem, 2vw, 1.8rem);
+      width: 100%;
+      text-align: left;
+      box-sizing: border-box;
+  }
+  .feature-box h3:last-of-type {
+      margin-bottom: 0;
+  }
+  .feature-box h3::before {
+    content: '‣ ';
+    color: red;
+    text-shadow: 0 0 5px red, 0 0 10px red;
+  }
+  .feature-box h3:nth-of-type(1),
+  .feature-box h3:nth-of-type(6) {
+    padding-left: 4.8rem;
+  }
+  .feature-box h3:nth-of-type(2),
+  .feature-box h3:nth-of-type(5) {
+    padding-left: 1.5rem;
+  }
+  .feature-box h3:nth-of-type(3),
+  .feature-box h3:nth-of-type(4) {
+    padding-left: 0.1rem;
   }
   .content-box {
     background-color: rgba(0, 0, 0, 0.3);
@@ -163,29 +193,28 @@ redirect_from:
     flex-direction: column;
     justify-content: flex-start;
   }
-
   .content-box h4 {
     margin-top: 0;
     margin-bottom: 15px;
     color: #fff;
   }
   .support.content-box .donatemsg {
-    font-size: clamp(1.2rem, 1vw, 1.65rem);
+    font-size: clamp(1.6rem, 1vw, 1.60rem);
   }
   .donate-text {
-    font-size: clamp(0.7rem, 1vw, 1.1rem);
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   }
   .donate-icon {
-    font-size: clamp(1.5rem, 2vw, 5.1rem);
+    font-size: clamp(4.9rem, 2vw, 5.1rem);
   }
   .donate.content-box a:hover {
     color: red !important;
     text-shadow: 0 0 5px red, 0 0 10px red !important;
   }
-.row.texte .col-xs-12 > div[style="text-align: center; margin-top: 20px;"] a:hover {
+  .row.texte .col-xs-12 > div[style="text-align: center; margin-top: 20px;"] a:hover {
     color: red !important;
     text-shadow: 0 0 5px red !important;
-}
+  }
   .row.texte {
     display: flex;
     flex-wrap: wrap;
@@ -212,6 +241,21 @@ redirect_from:
     color: red !important;
     text-shadow: 0 0 5px red, 0 0 10px red !important;
   }
+  @media (orientation: portrait) {
+    .hero-section-background {
+      background-size: auto 125%;
+    }
+  }
+  @media (min-width: 1200px) {
+    .hero-section-background {
+      background-size: 160%;
+    }
+  }
+  @media (min-width: 1200px) and (orientation: portrait) {
+    .hero-section-background {
+      background-size: auto 155%;
+    }
+  }
 </style>
 <div class="center-section">
     <div class="hero-section-background">
@@ -229,12 +273,12 @@ redirect_from:
         <h2 class="headline"><b>A free</b></h2>
             <h1 class="main-headline"><b>arena shooter</b></h1>
         <div class="feature-box">
-            <h2>Accessible to everyone</h2>
-            <h2>Available for Windows and Linux</h2>
-            <h2>A movement system with a very high skill ceiling</h2>
-            <h2>A huge amount of mutators and game altering variables to pick and choose from</h2>
-            <h2>Create maps with other players, in real-time coop, with our map editor</h2>
-            <h2>Over {{ site.time | date: "%Y" | minus: 2009 }} years of active development, and still going!</h2>
+            <h3>Accessible to everyone</h3>
+            <h3>Available for Windows and Linux</h3>
+            <h3>A movement system with a very high skill ceiling</h3>
+            <h3>A huge amount of mutators and game altering variables to pick and choose from</h3>
+            <h3>Create maps with other players, in real-time coop, with our map editor</h3>
+            <h3>Over {{ site.time | date: "%Y" | minus: 2009 }} years of active development, and still going!</h3>
         </div>
         <div class="center" style="padding:5px;">
             <a href="/discord" class="btn btn-primary">
@@ -250,10 +294,10 @@ redirect_from:
 </div>
 
 <!--
-/* SPACEHOLDER FOR A NEW TRAILER */
+/* FOR A NEW TRAILER */
 <div class="center-section">
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ site.data.game.youtube }}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ site.data.game.youtube }}?modestbranding=1&rel=0" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 -->
