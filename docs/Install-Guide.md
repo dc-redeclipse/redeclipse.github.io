@@ -43,14 +43,5 @@ From the command line:
 - Enter the source directory with `cd src`
 - Run the game with `./redeclipse.sh`
 
-## macOS
-- [Download the macOS tarball](/download/macos).
-- When it is done, click the resulting TAR.BZ2 file in your downloads folder on the dock.
-- Archive utility will extract the contents into the same folder and open a Finder window with redeclipse.app highlighted.
-- Drag and drop the redeclipse.app package to your favourite location (Desktop, Applications folder, whatever).
-- Run redeclipse.app.
-
-If this is the first time running the app, the operating system complains that it can't run an unsigned package, simply right (or cmd) click and select Open. In future you will be able to run the app as normal, this will override the warning for all future attempts. You can also do this from the command line.
-
 ## If you get stuck
 Don't panic! If you have trouble working out how to install and run the game, you can get assistance on our [Discord](/discord) or [Discussions](/discuss). Please be ready to provide as much information as possible, especially what operating system you're on and specifically which package you're trying to install!
