@@ -10,6 +10,6 @@
 - url: /issues
   title: "Issue Tracker"
   class: "fas fa-tasks"
-- url: /servers
-  title: "Server List"
-  class: "fas fa-server"
+- url: /github
+  title: "GitHub"
+  class: "fab fa-github"
