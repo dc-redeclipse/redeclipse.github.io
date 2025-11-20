@@ -1,420 +1,81 @@
----
-title: A free arena shooter featuring parkour
-layout: home
-permalink:
-redirect_from:
-  - /home
----
-<style>
-  .lightboxOverlay, .ekko-lightbox .modal-content, .ekko-lightbox .modal-dialog {
-    background: #000 !important;
-  }
-  .ekko-lightbox .modal-content {
-    background-color: #000 !important;
-    box-shadow: none !important;
-  }
-  .ekko-lightbox .modal-header {
-    border-bottom-color: red !important;
-  }
-  .ekko-lightbox .close, .lightbox .close, .modal-header .close, .ekko-lightbox .modal-header .close {
-    color: #fff !important;
-    opacity: 1 !important;
-    text-shadow: none !important;
-  }
-  .ekko-lightbox .close:hover, .lightbox .close:hover, .modal-header .close:hover, .ekko-lightbox .modal-header .close:hover {
-    color: red !important;
-    text-shadow: 0 0 5px red, 0 0 10px red !important;
-  }
-  .navbar-static-top {
-    margin-bottom: 0 !important;
-  }
-  .pagecontent {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-  .main-headline {
-    text-align: center;
-    font-size: 2.8em;
-    font-weight: bold;
-    margin-bottom: 0.5em;
-  }
-  .center-section {
-    text-align: center;
-  }
-  .hero-section-background {
-    background-image: url('/bits/bgtop.jpg');
-    background-size: 10%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    padding-top: 0px;
-    padding-bottom: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    transition: background-position 0.1s ease-out;
-  }
-  .center-section img[alt="Red Eclipse"] {
-    max-width: 46%;
-    height: auto;
-    display: block;
-    margin: auto;
-  }
-  .center-section p.version a[href="/download"] {
-    color: #fff !important;
-    text-shadow: none !important;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-  }
-  .center-section p.version a[href="/download"]:hover {
-    color: #40E0D0 !important;
-    text-shadow: 0 0 10px #40E0D0, 0 0 20px #40E0D0, 0 0 30px #40E0D0, 0 0 40px #40E0D0, 0 0 50px #40E0D0 !important;
-  }
-  @keyframes pulse-glow {
-    0% {
-      box-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red;
-    }
-    50% {
-      box-shadow: 0 0 20px red, 0 0 40px red, 0 0 60px red;
-    }
-    100% {
-      box-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red;
-    }
-  }
-  @keyframes pulse-btn-color {
-    0%, 100% {
-      color: #fff;
-      text-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red;
-    }
-    50% {
-      color: #ff5252;
-      text-shadow: 0 0 20px red, 0 0 40px red, 0 0 60px red;
-    }
-  }
-  a.btn-primary[href="/steam"] {
-    border-radius: 9999px;
-    font-size: clamp(1.56rem, 2.86vw, 2.58rem);
-    padding: 0.8em 1.6em;
-    animation: pulse-glow 2s infinite ease-in-out;
-  }
-  a.btn-primary[href="/steam"]:hover {
-    animation: none !important;
-    box-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red !important;
-  }
-  a.btn-primary[href="/steam"] p {
-    margin: 0;
-  }
-  a.btn-primary[href="/steam"] p.download, a.btn-primary[href="/steam"] p.version {
-    animation: pulse-btn-color 2s infinite ease-in-out;
-    background: transparent;
-    border-radius: 0.5em;
-    color: #fff;
-    display: block;
-    padding: 0.05em 0.4em;
-    margin-bottom: 0.18em;
-    transition: none;
-  }
-  a.btn-primary[href="/steam"]:hover p.download, a.btn-primary[href="/steam"]:hover p.version {
-    animation: none !important;
-    color: #fff !important;
-    text-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red !important;
-  }
-  a.btn-primary[href="/steam"] p.download {
-    font-size: 1.3em;
-    font-weight: bold;
-    margin-bottom: 0.0em;
-  }
-  a.btn-primary[href="/steam"] p.version {
-    font-size: 0.58em;
-  }
-    a.btn-primary[href="/discord"] {
-      background-color: #7289DA;
-      border-color: #7289DA;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-  }
-  a.btn-primary[href="/discord"] p.version {
-    font-size: 0.9em;
-  }
-  .feature-box {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 9999px;
-    padding: 30px 20px;
-    margin: 20px auto;
-    max-width: 790px;
-    box-shadow: 0 0 3px red, 0 0 7px red, 0 0 14px red;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .feature-box h2 {
-    color: #fff;
-    margin-top: 0.0em;
-    margin-bottom: 0.2em;
-    font-weight: bold;
-    letter-spacing: -0.001em;
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
-  }
-  .feature-box h3 {
-      color: #fff;
-      margin-top: 0.0em;
-      margin-bottom: 0.8em;
-      text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
-      font-size: clamp(1rem, 2vw, 1.8rem);
-      width: 100%;
-      text-align: left;
-      box-sizing: border-box;
-  }
-  .feature-box h3:last-of-type {
-      margin-bottom: 0;
-  }
-  .feature-box h3::before {
-    content: '‣ ';
-    color: red;
-    text-shadow: 0 0 5px red, 0 0 10px red;
-  }
-  .feature-box h3:nth-of-type(1),
-  .feature-box h3:nth-of-type(6) {
-    padding-left: 4.8rem;
-  }
-  .feature-box h3:nth-of-type(2),
-  .feature-box h3:nth-of-type(5) {
-    padding-left: 1.5rem;
-  }
-  .feature-box h3:nth-of-type(3),
-  .feature-box h3:nth-of-type(4) {
-    padding-left: 0.1rem;
-  }
-  .content-box {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 20px;
-    box-shadow: 0 0 10.4px rgba(255, 0, 0, 0.39);
-    box-sizing: border-box;
-    min-height: 170px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  .content-box h4 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: #fff;
-  }
-  .support.content-box .donatemsg {
-    font-size: clamp(1.6rem, 1vw, 1.60rem);
-  }
-  .donate-text {
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-  }
-  .donate-icon {
-    font-size: clamp(4.9rem, 2vw, 5.1rem);
-  }
-  .donate.content-box a:hover {
-    color: red !important;
-    text-shadow: 0 0 5px red, 0 0 10px red !important;
-  }
-  .row.texte .col-xs-12 > div[style="text-align: center; margin-top: 20px;"] a:hover {
-    color: red !important;
-    text-shadow: 0 0 5px red !important;
-  }
-  .row.texte {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 0 !important;
-  }
-  .row.texte > [class*="col-"] {
-    margin-top: 0 !important;
-    margin-bottom: 20px;
-  }
-  .row.texte > [class*="col-"]:first-child p:first-child {
-      margin-top: 0 !important;
-  }
-  #carousel-example-generic {
-    margin-bottom: -2px !important;
-  }
-  .center-section h2.headline {
-    text-shadow: none !important;
-    margin-top: 60px;
-  }
-  .center-section h1.main-headline {
-    text-shadow: none !important;
-  }
-  .carousel-control:hover {
-    color: red !important;
-    text-shadow: 0 0 5px red, 0 0 10px red !important;
-  }
-  @media (orientation: portrait) {
-    .hero-section-background {
-      background-size: auto 110%;
-    }
-  }
-  @media (min-width: 1200px) {
-    .hero-section-background {
-      background-size: 150%;
-    }
-  }
-  @media (min-width: 1200px) and (orientation: portrait) {
-    .hero-section-background {
-      background-size: auto 150%;
-    }
-  }
-</style>
-<div class="center-section">
-    <div class="hero-section-background">
-        <a href="/steam"><img src="/bits/redeclipse-large.png" class="img-responsive" alt="Red Eclipse"></a>
-        <div class="center" style="padding:5px;">
-            <a href="/steam" class="btn btn-primary"><p class="download">
-                    <span class="fab fa-steam" aria-hidden="true"></span> FREE DOWNLOAD
-                </p><p class="version">
-                    v{{ site.data.game.version }} ({{ site.data.game.release }}) released {{ site.data.game.date }}
-                </p></a>
-        </div>
-        <p class="version" style="margin:0; font-size:12px;">
-            <a href="/download">Install Red Eclipse without Steam</a>
-        </p>
-        <h2 class="headline"><b>A free</b></h2>
-            <h1 class="main-headline"><b>arena shooter</b></h1>
-        <div class="feature-box">
-            <h3>Accessible to everyone</h3>
-            <h3>Available for Windows and Linux</h3>
-            <h3>A movement system with a very high skill ceiling</h3>
-            <h3>A huge amount of mutators and game altering variables to pick and choose from</h3>
-            <h3>Create maps with other players, in real-time coop, with our map editor</h3>
-            <h3>Over {{ site.time | date: "%Y" | minus: 2009 }} years of active development, and still going!</h3>
-        </div>
-        <div class="center" style="padding:5px;">
-            <a href="/discord" class="btn btn-primary">
-                <p class="download">
-                    <span class="fab fa-discord" aria-hidden="true"></span> JOIN THE COMMUNITY
-                </p>
-                <p class="version">
-                    Chat with other players on Discord
-                </p>
-            </a>
-        </div>
-    </div>
-</div>
+# Site settings
+title: Red Eclipse
+description: A free arena shooter featuring parkour
+repository: redeclipse/redeclipse.github.io
+organisation: redeclipse
+website: https://redeclipse.net/
+email: contact@redeclipse.net
+github: [metadata]
+locs:
+  api: "https://api.github.com"
+  ref: "https://github.com"
 
-<!--
-/* FOR A NEW TRAILER */
-<div class="center-section">
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ site.data.game.youtube }}?modestbranding=1&rel=0" frameborder="0" allowfullscreen></iframe>
-    </div>
-</div>
--->
+# Where things are
+source: "."
+collections_dir: "pages"
+layouts_dir: "layouts"
+data_dir: "data"
+includes_dir: "includes"
 
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner" role="listbox">
-        {% capture x %}{{ site.data.game.screenshots.pages | default: 20 }}{% endcapture %}
-        {% assign items_per_slide = 1 %}
-        {% for i in (0..x) %}
-        <div class="item{% if i == 0 %} active{% endif %}">
-            <div class="row" style="margin:0; padding:0;">
-                {% for j in (1..items_per_slide) %}
-                {% assign k = i | times: items_per_slide | plus: j %}
-                {% assign m = k | prepend: '0' %}
-                {% assign n = m | size %}
-                {% if n <= 2 %}{% assign m = k | prepend: '00' %}{% endif %}
-                <div class="col-xs-12" style="padding:0; margin:0;">
-                    <a href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot">
-                        <img src="/bits/thumbs/{{ m }}.jpg" alt="screenshot" style="width:100%; height:auto; display:block;">
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-<div class="row texte">
-    <div class="col-xs-12 col-sm-4 col-md-4">
-        <p>{{ site.title }} is a movement focused arena shooter, inspired by old-school classics like Quake and Unreal Tournament, but with it's own unique flavor. We develop the game with a focus on balanced and varied weapons, with the in-depth movement/parkour system adding a big touch of skill expression for those who master it.</p>
-    </div>
-    <div class="col-xs-12 col-sm-4 col-md-4">
-        <p>If you have any suggestions to give us, or maybe even want to help us develop the game, don't hesitate to drop by our <a href="/discord">Discord</a> or <a href="/discuss">Discussions</a> to talk to us! We work closely and try to maintain a standard of friendly behavior in our <a href="/discord">community</a>. So don't be afraid to join us and tell us your thoughts!</p>
-    </div>
-    <div class="col-xs-12 col-sm-4 col-md-4">
-        <p>It's a completely free and Open Source game, based on <a href="http://cubeengine.com/">Cube 2</a>; specifically, <a href="http://cubeengine.com/">Sauerbraten</a> and <a href="http://cubeengine.com/">Tesseract</a>, using <a href="http://libsdl.org/">SDL 2</a> and <a href="http://opengl.org/">OpenGL</a>, which allows it to be ported to many platforms. It's not just available on <a href="/steam">Steam</a>; For those who wish to make the most of the fact {{ site.title }} is Open Source, you can <a href="/download">download a package</a> for Windows, GNU/Linux and BSD.</p>
-    </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 support content-box">
-        <h4>Support Us</h4>
-        <p class="donatemsg">{{ site.title }} is developed by volunteers, and you get it free of charge; your contributions keep this project alive. You're encouraged to get involved with the community and <a href="/contribute">help evolve the game</a>.</p>
-    </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 donate content-box">
-        <h4>Donate</h4>
-        <div style="text-align: center;">
-            <a href="/opencollective" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease; display: inline-block; vertical-align: top;">
-                <span class="fas fa-dollar-sign donate-icon" aria-hidden="true"></span><br>
-                <h2 class="donate-text" style="margin-top: 0.33em; color: inherit; text-shadow: inherit; font-weight: normal; line-height: 2.9em;">Open Collective</h2>
-            </a>
-            <a href="/donate" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease; display: inline-block; vertical-align: top;">
-                <span class="fab fa-paypal donate-icon" aria-hidden="true"></span><br>
-                <h2 class="donate-text" style="margin-top: 0.33em; color: inherit; text-shadow: inherit; font-weight: normal; line-height: 2.9em;">PayPal</h2>
-            </a>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 affiliate content-box">
-        <h4>Affiliate</h4>
-        <a href="http://cubeengine.com/"><img src="/bits/cube2.png" class="img-responsive img-cube2" alt="Cube Engine 2" style="margin:auto"></a>
-        <a href="http://tesseract.gg/"><img src="/bits/tesseract.png" class="img-responsive img-tesseract" alt="Tesseract" style="margin:auto"></a>
-    </div>
-    <div class="col-xs-12">
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="/discord" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
-                <span class="fab fa-discord" aria-hidden="true" style="font-size: 3.4em;"></span>
-            </a>
-            <a href="/facebook" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
-                <span class="fab fa-facebook" aria-hidden="true" style="font-size: 3.4em;"></span>
-            </a>
-            <a href="/instagram" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
-                <span class="fab fa-instagram" aria-hidden="true" style="font-size: 3.4em;"></span>
-            </a>
-            <a href="/youtube" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
-                <span class="fab fa-youtube" aria-hidden="true" style="font-size: 3.4em;"></span>
-            </a>
-            <a href="/reddit" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
-                <span class="fab fa-reddit" aria-hidden="true" style="font-size: 3.4em;"></span>
-            </a>
-        </div>
-    </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var leftControl = document.querySelector('#carousel-example-generic .left.carousel-control');
-        var rightControl = document.querySelector('#carousel-example-generic .right.carousel-control');
-        if (leftControl) {
-            leftControl.addEventListener('mouseup', function() {
-                leftControl.blur();
-            });
-        }
-        if (rightControl) {
-            rightControl.addEventListener('mouseup', function() {
-                rightControl.blur();
-            });
-        }
-        const heroSection = document.querySelector('.hero-section-background');
-        if (heroSection) {
-            const parallaxAmount = 30;
-            document.body.addEventListener('mousemove', (e) => {
-                const rect = heroSection.getBoundingClientRect();
-                const viewportCenterX = window.innerWidth / 2;
-                const viewportCenterY = window.innerHeight / 2;
-                const normalizedX = (e.clientX - viewportCenterX) / viewportCenterX;
-                const normalizedY = (e.clientY - viewportCenterY) / viewportCenterY;
-                const offsetX = normalizedX * parallaxAmount;
-                const offsetY = normalizedY * parallaxAmount;
-                heroSection.style.backgroundPosition = `calc(50% + ${-offsetX}px) calc(50% + ${-offsetY}px)`;
-            });
-            document.body.addEventListener('mouseleave', () => {
-                heroSection.style.backgroundPosition = 'center center';
-            });
-        }
-    });
-</script>
+# Handling Reading
+exclude:
+  - "_site"
+  - ".github"
+  - "plugins"
+  - "layouts"
+  - "data"
+  - "includes"
+  - "_config.yml"
+  - "CNAME"
+  - "Gemfile"
+  - "Gemfile.lock"
+encoding: "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+strict_front_matter: false
+
+# Filtering Content
+show_drafts: null
+limit_posts: 0
+future: false
+unpublished: false
+
+# Plugins
+plugins:
+  - jekyll-avatar
+  - jekyll-mentions
+  - jekyll-redirect-from
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jemoji
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+excerpt_separator: "\n\n"
+paginate: 25
+
+#collections:
+#  discussion:
+#    output: true
+#    permalink: /:collection/:title/
+
+# Outputting
+# permalink: date
+# paginate_path: /page:num
+# timezone: null
+
+# Markdown Processors
+kramdown:
+    auto_ids: true
+    entity_output: as_char
+    toc_levels: 1..6
+    smart_quotes: lsquo,rsquo,ldquo,rdquo
+    input: GFM
+    hard_wrap: false
+    footnote_nr: 1
+    show_warnings: false
+
+# Relative links
+relative_links:
+  enabled: true
+  collections: false
