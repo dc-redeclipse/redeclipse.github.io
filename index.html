@@ -435,17 +435,23 @@ redirect_from:
         const heroSection = document.querySelector('.hero-section-background');
         if (heroSection) {
             const parallaxAmount = 30;
-            document.body.addEventListener('mousemove', (e) => {
+            heroSection.addEventListener('mousemove', (e) => {
                 const rect = heroSection.getBoundingClientRect();
-                const viewportCenterX = window.innerWidth / 2;
-                const viewportCenterY = window.innerHeight / 2;
-                const normalizedX = (e.clientX - viewportCenterX) / viewportCenterX;
-                const normalizedY = (e.clientY - viewportCenterY) / viewportCenterY;
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const normalizedX = (x - centerX) / centerX;
+                const normalizedY = (y - centerY) / centerY;
+
                 const offsetX = normalizedX * parallaxAmount;
                 const offsetY = normalizedY * parallaxAmount;
+
                 heroSection.style.backgroundPosition = `calc(50% + ${-offsetX}px) calc(50% + ${-offsetY}px)`;
             });
-            document.body.addEventListener('mouseleave', () => {
+            heroSection.addEventListener('mouseleave', () => {
                 heroSection.style.backgroundPosition = 'center center';
             });
         }
@@ -466,3 +472,4 @@ redirect_from:
         });
     });
 </script>
+
