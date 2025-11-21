@@ -6,6 +6,37 @@ redirect_from:
   - /home
 ---
 <style>
+  #custom-cursor {
+    display: none;
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><linearGradient id="grad" x1="0%25" y1="0%25" x2="0%25" y2="100%25"><stop offset="0%25" stop-color="white"/><stop offset="100%25" stop-color="red"/></linearGradient></defs><path d="M16 0v32M0 16h32" stroke="url(%23grad)" stroke-width="2"/></svg>');
+    background-size: contain;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+  }
+  #custom-cursor.pulsing {
+    animation: pulse-cursor 1.5s infinite ease-in-out;
+  }
+  .hero-section-background a:hover {
+    cursor: none;
+  }
+  @keyframes pulse-cursor {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
   .lightboxOverlay, .ekko-lightbox .modal-content, .ekko-lightbox .modal-dialog {
     background: #000 !important;
   }
@@ -51,6 +82,7 @@ redirect_from:
     padding-left: 10px;
     padding-right: 10px;
     transition: background-position 0.1s ease-out;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path stroke="white" stroke-width="2" d="M16 0v32M0 16h32"/></svg>') 16 16, crosshair;
   }
   .center-section img[alt="Red Eclipse"] {
     max-width: 46%;
@@ -137,7 +169,7 @@ redirect_from:
     border-radius: 9999px;
     padding: 30px 20px;
     margin: 20px auto;
-    max-width: 790px;
+    max-width: 680px;
     box-shadow: 0 0 3px red, 0 0 7px red, 0 0 14px red;
     display: flex;
     flex-direction: column;
@@ -156,7 +188,7 @@ redirect_from:
       margin-top: 0.0em;
       margin-bottom: 0.8em;
       text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
-      font-size: clamp(1rem, 2vw, 1.8rem);
+      font-size: clamp(1rem, 2vw, 1.6rem);
       width: 100%;
       text-align: left;
       box-sizing: border-box;
@@ -257,9 +289,10 @@ redirect_from:
     }
   }
 </style>
+<div id="custom-cursor"></div>
 <div class="center-section">
     <div class="hero-section-background">
-        <a href="/steam"><img src="/bits/redeclipse-large.png" class="img-responsive" alt="Red Eclipse"></a>
+        <img src="/bits/redeclipse-large.png" class="img-responsive" alt="Red Eclipse">
         <div class="center" style="padding:5px;">
             <a href="/steam" class="btn btn-primary"><p class="download">
                     <span class="fab fa-steam" aria-hidden="true"></span> FREE DOWNLOAD
@@ -380,7 +413,7 @@ redirect_from:
                 <span class="fab fa-youtube" aria-hidden="true" style="font-size: 3.4em;"></span>
             </a>
             <a href="/reddit" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
-                <span class="fab fa-reddit" aria-hidden="true" style="font-size: 3.4em;"></span>
+                <span class="fab fa-reddit" aria-hidden-true" style="font-size: 3.4em;"></span>
             </a>
         </div>
     </div>
@@ -416,7 +449,20 @@ redirect_from:
                 heroSection.style.backgroundPosition = 'center center';
             });
         }
+        const cursor = document.getElementById('custom-cursor');
+        window.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('.hero-section-background a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.style.display = 'block';
+                cursor.classList.add('pulsing');
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.style.display = 'none';
+                cursor.classList.remove('pulsing');
+            });
+        });
     });
 </script>
-
-
