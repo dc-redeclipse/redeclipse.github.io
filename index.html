@@ -74,7 +74,7 @@ redirect_from:
   }
   .hero-section-background {
     background-image: url('/bits/bgtop.jpg');
-    background-size: 10%;
+    background-size: auto 110%;
     background-repeat: no-repeat;
     background-position: center center;
     padding-top: 0px;
@@ -100,18 +100,18 @@ redirect_from:
   }
   @keyframes pulse-glow {
     0%, 100% {
-      box-shadow: 0 0 17px rgba(255, 0, 0, 0.6), 0 0 41px rgba(255, 0, 0, 0.36), 0 0 60px rgba(255, 0, 0, 0.24);
+      box-shadow: 0 0 14px rgba(255, 0, 0, 0.5), 0 0 34px rgba(255, 0, 0, 0.3), 0 0 50px rgba(255, 0, 0, 0.2);
     }
     50% {
-      box-shadow: 0 0 34px rgba(255, 0, 0, 0.96), 0 0 58px rgba(255, 0, 0, 0.72), 0 0 84px rgba(255, 0, 0, 0.48);
+      box-shadow: 0 0 28px rgba(255, 0, 0, 0.8), 0 0 48px rgba(255, 0, 0, 0.6), 0 0 70px rgba(255, 0, 0, 0.4);
     }
   }
   @keyframes pulse-glow-small {
     0%, 100% {
-      box-shadow: 0 0 22px rgba(255, 0, 0, 0.48), 0 0 34px rgba(255, 0, 0, 0.24);
+      box-shadow: 0 0 18px rgba(255, 0, 0, 0.4), 0 0 28px rgba(255, 0, 0, 0.2);
     }
     50% {
-      box-shadow: 0 0 34px rgba(255, 0, 0, 0.84), 0 0 46px rgba(255, 0, 0, 0.6);
+      box-shadow: 0 0 28px rgba(255, 0, 0, 0.7), 0 0 38px rgba(255, 0, 0, 0.5);
     }
   }
   @keyframes pulse-btn-color {
@@ -329,21 +329,6 @@ redirect_from:
     color: red !important;
     text-shadow: 0 0 5px red, 0 0 10px red !important;
   }
-  @media (orientation: portrait) {
-    .hero-section-background {
-      background-size: auto 110%;
-    }
-  }
-  @media (min-width: 1200px) {
-    .hero-section-background {
-      background-size: 150%;
-    }
-  }
-  @media (min-width: 1200px) and (orientation: portrait) {
-    .hero-section-background {
-      background-size: auto 150%;
-    }
-  }
 </style>
 <div id="custom-cursor"></div>
 <div class="center-section">
@@ -524,3 +509,5 @@ redirect_from:
         });
     });
 </script>
+
+
