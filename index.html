@@ -84,7 +84,7 @@ redirect_from:
     transition: background-position 0.1s ease-out;
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path stroke="white" stroke-width="2" d="M16 0v32M0 16h32"/></svg>') 16 16, crosshair;
   }
-  .center-section img[alt="Red Eclipse"] {
+  .center-section img[alt="{{ site.title }}"] {
     max-width: 46%;
     height: auto;
     display: block;
@@ -118,6 +118,18 @@ redirect_from:
     50% {
       color: #ff5252;
       text-shadow: 0 0 20px red, 0 0 40px red, 0 0 60px red;
+    }
+  }
+  @keyframes pulse-dot {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 4px red, 0 0 8px red;
+      opacity: 0.7;
+    }
+    50% {
+      transform: scale(1.2);
+      box-shadow: 0 0 8px red, 0 0 16px red;
+      opacity: 1;
     }
   }
   a.btn-primary[href="/steam"] {
@@ -169,11 +181,11 @@ redirect_from:
     border-radius: 9999px;
     padding: 30px 20px;
     margin: 20px auto;
-    max-width: 680px;
+    max-width: 520px;
     box-shadow: 0 0 3px red, 0 0 7px red, 0 0 14px red;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
   .feature-box h2 {
     color: #fff;
@@ -190,29 +202,62 @@ redirect_from:
       text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
       font-size: clamp(1rem, 2vw, 1.6rem);
       width: 100%;
-      text-align: left;
+      text-align: center;
       box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
   }
   .feature-box h3:last-of-type {
       margin-bottom: 0;
   }
   .feature-box h3::before {
-    content: '‣ ';
-    color: red;
-    text-shadow: 0 0 5px red, 0 0 10px red;
+    content: '';
+    width: 5px;
+    height: 5px;
+    background-color: red;
+    border-radius: 50%;
+    box-shadow: 0 0 5px red, 0 0 10px red;
+    flex-shrink: 0;
+    animation: pulse-dot 2s infinite ease-in-out;
+  }
+  .feature-box h3::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background-color: red;
+    border-radius: 50%;
+    box-shadow: 0 0 5px red, 0 0 10px red;
+    flex-shrink: 0;
+    animation: pulse-dot 2s infinite ease-in-out;
   }
   .feature-box h3:nth-of-type(1),
   .feature-box h3:nth-of-type(6) {
-    padding-left: 4.8rem;
+    padding-left: 5.5rem;
+    padding-right: 5.5rem;
   }
   .feature-box h3:nth-of-type(2),
   .feature-box h3:nth-of-type(5) {
-    padding-left: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
   .feature-box h3:nth-of-type(3),
   .feature-box h3:nth-of-type(4) {
-    padding-left: 0.1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
+  .feature-box h3:nth-of-type(1)::before,
+  .feature-box h3:nth-of-type(1)::after { animation-delay: 0s; }
+  .feature-box h3:nth-of-type(2)::before,
+  .feature-box h3:nth-of-type(2)::after { animation-delay: 0.2s; }
+  .feature-box h3:nth-of-type(3)::before,
+  .feature-box h3:nth-of-type(3)::after { animation-delay: 0.4s; }
+  .feature-box h3:nth-of-type(4)::before,
+  .feature-box h3:nth-of-type(4)::after { animation-delay: 0.6s; }
+  .feature-box h3:nth-of-type(5)::before,
+  .feature-box h3:nth-of-type(5)::after { animation-delay: 0.8s; }
+  .feature-box h3:nth-of-type(6)::before,
+  .feature-box h3:nth-of-type(6)::after { animation-delay: 1.0s; }
   .content-box {
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 5px;
@@ -292,7 +337,7 @@ redirect_from:
 <div id="custom-cursor"></div>
 <div class="center-section">
     <div class="hero-section-background">
-        <img src="/bits/redeclipse-large.png" class="img-responsive" alt="Red Eclipse">
+        <img src="/bits/redeclipse-large.png" class="img-responsive" alt="{{ site.title }}">
         <div class="center" style="padding:5px;">
             <a href="/steam" class="btn btn-primary"><p class="download">
                     <span class="fab fa-steam" aria-hidden="true"></span> FREE DOWNLOAD
@@ -301,17 +346,17 @@ redirect_from:
                 </p></a>
         </div>
         <p class="version" style="margin:0; font-size:12px;">
-            <a href="/download">Install Red Eclipse without Steam</a>
+            <a href="/download">Install {{ site.title }} without Steam</a>
         </p>
         <h2 class="headline"><b>A free</b></h2>
             <h1 class="main-headline"><b>arena shooter</b></h1>
         <div class="feature-box">
             <h3>Accessible to everyone</h3>
-            <h3>Available for Windows and Linux</h3>
+            <h3>Available for Windows, Linux and BSD</h3>
             <h3>A movement system with a very high skill ceiling</h3>
-            <h3>A huge amount of mutators and game altering variables to pick and choose from</h3>
-            <h3>Create maps with other players, in real-time coop, with our map editor</h3>
-            <h3>Over {{ site.time | date: "%Y" | minus: 2009 }} years of active development, and still going!</h3>
+            <h3>A huge amount of mutators and game altering variables</h3>
+            <h3>Create maps with other players, in real-time coop</h3>
+            <h3>Over {{ site.time | date: "%Y" | minus: 2009 }} years of active development</h3>
         </div>
         <div class="center" style="padding:5px;">
             <a href="/discord" class="btn btn-primary">
