@@ -92,32 +92,34 @@ redirect_from:
   }
   .center-section p.version a[href="/download"] {
     color: #fff !important;
-    text-shadow: none !important;
+    text-shadow: none;
     transition: color 0.3s ease, text-shadow 0.3s ease;
   }
   .center-section p.version a[href="/download"]:hover {
-    color: #40E0D0 !important;
-    text-shadow: 0 0 10px #40E0D0, 0 0 20px #40E0D0, 0 0 30px #40E0D0, 0 0 40px #40E0D0, 0 0 50px #40E0D0 !important;
+    animation: pulse-red-text 2s infinite ease-in-out;
   }
   @keyframes pulse-glow {
-    0% {
-      box-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red;
+    0%, 100% {
+      box-shadow: 0 0 17px rgba(255, 0, 0, 0.6), 0 0 41px rgba(255, 0, 0, 0.36), 0 0 60px rgba(255, 0, 0, 0.24);
     }
     50% {
-      box-shadow: 0 0 20px red, 0 0 40px red, 0 0 60px red;
+      box-shadow: 0 0 34px rgba(255, 0, 0, 0.96), 0 0 58px rgba(255, 0, 0, 0.72), 0 0 84px rgba(255, 0, 0, 0.48);
     }
-    100% {
-      box-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red;
+  }
+  @keyframes pulse-glow-small {
+    0%, 100% {
+      box-shadow: 0 0 22px rgba(255, 0, 0, 0.48), 0 0 34px rgba(255, 0, 0, 0.24);
+    }
+    50% {
+      box-shadow: 0 0 34px rgba(255, 0, 0, 0.84), 0 0 46px rgba(255, 0, 0, 0.6);
     }
   }
   @keyframes pulse-btn-color {
     0%, 100% {
-      color: #fff;
-      text-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
     }
     50% {
-      color: #ff5252;
-      text-shadow: 0 0 20px red, 0 0 40px red, 0 0 60px red;
+      text-shadow: 0 0 14px #fff, 0 0 28px #fff, 0 0 42px #fff;
     }
   }
   @keyframes pulse-dot {
@@ -132,21 +134,32 @@ redirect_from:
       opacity: 1;
     }
   }
+  @keyframes pulse-red-text {
+    0%, 100% {
+      color: #fff;
+      text-shadow: 0 0 11px red, 0 0 21px red;
+    }
+    50% {
+      color: red;
+      text-shadow: 0 0 21px red, 0 0 42px red;
+    }
+  }
   a.btn-primary[href="/steam"] {
     border-radius: 9999px;
     font-size: clamp(1.56rem, 2.86vw, 2.58rem);
     padding: 0.8em 1.6em;
-    animation: pulse-glow 2s infinite ease-in-out;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    animation: pulse-glow-small 2s infinite ease-in-out;
   }
   a.btn-primary[href="/steam"]:hover {
-    animation: none !important;
-    box-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red !important;
+    background-color: red;
+    border-color: red;
+    animation: pulse-glow 2s infinite ease-in-out;
   }
   a.btn-primary[href="/steam"] p {
     margin: 0;
   }
   a.btn-primary[href="/steam"] p.download, a.btn-primary[href="/steam"] p.version {
-    animation: pulse-btn-color 2s infinite ease-in-out;
     background: transparent;
     border-radius: 0.5em;
     color: #fff;
@@ -156,9 +169,7 @@ redirect_from:
     transition: none;
   }
   a.btn-primary[href="/steam"]:hover p.download, a.btn-primary[href="/steam"]:hover p.version {
-    animation: none !important;
-    color: #fff !important;
-    text-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red !important;
+    animation: pulse-btn-color 2s infinite ease-in-out;
   }
   a.btn-primary[href="/steam"] p.download {
     font-size: 1.3em;
