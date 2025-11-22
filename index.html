@@ -116,10 +116,10 @@ redirect_from:
   }
   @keyframes pulse-btn-color {
     0%, 100% {
-      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+      text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
     }
     50% {
-      text-shadow: 0 0 14px #fff, 0 0 28px #fff, 0 0 42px #fff;
+      text-shadow: 0 0 14px red, 0 0 28px red, 0 0 42px red;
     }
   }
   @keyframes pulse-dot {
@@ -145,13 +145,14 @@ redirect_from:
     }
   }
   a.btn-primary[href="/steam"] {
+    border-color: red;
     border-radius: 9999px;
     font-size: clamp(1.56rem, 2.86vw, 2.58rem);
     padding: 0.8em 1.6em;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     animation: pulse-glow-small 2s infinite ease-in-out;
   }
-  a.btn-primary[href="/steam"]:hover {
+  a.btn-primary[href="/steam"]:hover, a.btn-primary[href="/steam"]:active {
     background-color: red;
     border-color: red;
     animation: pulse-glow 2s infinite ease-in-out;
@@ -168,7 +169,8 @@ redirect_from:
     margin-bottom: 0.18em;
     transition: none;
   }
-  a.btn-primary[href="/steam"]:hover p.download, a.btn-primary[href="/steam"]:hover p.version {
+  a.btn-primary[href="/steam"]:hover p.download, a.btn-primary[href="/steam"]:active p.download,
+  a.btn-primary[href="/steam"]:hover p.version, a.btn-primary[href="/steam"]:active p.version {
     animation: pulse-btn-color 2s infinite ease-in-out;
   }
   a.btn-primary[href="/steam"] p.download {
@@ -493,19 +495,35 @@ redirect_from:
             });
         }
         const cursor = document.getElementById('custom-cursor');
-        window.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-        document.querySelectorAll('.hero-section-background a').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursor.style.display = 'block';
-                cursor.classList.add('pulsing');
+        if (cursor) {
+            const updateCursorSize = () => {
+                const targetSizeInDevicePixels = 62;
+                const cssSize = targetSizeInDevicePixels / window.devicePixelRatio;
+                cursor.style.width = `${cssSize}px`;
+                cursor.style.height = `${cssSize}px`;
+            };
+            updateCursorSize();
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(updateCursorSize, 100);
             });
-            link.addEventListener('mouseleave', () => {
-                cursor.style.display = 'none';
-                cursor.classList.remove('pulsing');
+            window.addEventListener('mousemove', e => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
             });
-        });
+            document.querySelectorAll('.hero-section-background a').forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    cursor.style.display = 'block';
+                    cursor.classList.add('pulsing');
+                });
+                link.addEventListener('mouseleave', () => {
+                    cursor.style.display = 'none';
+                    cursor.classList.remove('pulsing');
+                });
+            });
+        }
     });
 </script>
+
+
