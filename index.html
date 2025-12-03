@@ -11,17 +11,15 @@ redirect_from:
     position: fixed;
     width: 32px;
     height: 32px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="glow" x="-100%25" y="-100%25" width="300%25" height="300%25"><feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="red"/></filter></defs><g filter="url(%23glow)" stroke="orange" stroke-width="2" fill="none" stroke-linecap="round"><path d="M16 0v32M0 16h32"/><path d="M6 6 l4 4 M26 6 l-4 4 M6 26 l4 -4 M26 26 l-4 -4"/></g></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path stroke="white" stroke-width="2" d="M16 0v32M0 16h32"/></svg>');
     background-size: contain;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
   }
-  #custom-cursor.pulsing {
+  #custom-cursor.hover-effect {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="glow" x="-100%25" y="-100%25" width="300%25" height="300%25"><feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="red"/></filter></defs><g filter="url(%23glow)" stroke="orange" stroke-width="2" fill="none" stroke-linecap="round"><path d="M16 0v32M0 16h32"/><path d="M6 6 l4 4 M26 6 l-4 4 M6 26 l4 -4 M26 26 l-4 -4"/></g></svg>');
     animation: pulse-cursor 1.5s infinite ease-in-out;
-  }
-  .hero-section-background a:hover {
-    cursor: none;
   }
   @keyframes pulse-cursor {
     0% {
@@ -82,7 +80,10 @@ redirect_from:
     padding-left: 10px;
     padding-right: 10px;
     transition: background-position 0.1s ease-out;
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path stroke="white" stroke-width="2" d="M16 0v32M0 16h32"/></svg>') 16 16, crosshair;
+    cursor: none;
+  }
+  .hero-section-background a {
+    cursor: none;
   }
   .center-section img[alt="{{ site.title }}"] {
     max-width: 46%;
@@ -493,31 +494,23 @@ redirect_from:
             });
         }
         const cursor = document.getElementById('custom-cursor');
-        if (cursor) {
-            const updateCursorSize = () => {
-                const targetSizeInDevicePixels = 62;
-                const cssSize = targetSizeInDevicePixels / window.devicePixelRatio;
-                cursor.style.width = `${cssSize}px`;
-                cursor.style.height = `${cssSize}px`;
-            };
-            updateCursorSize();
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(updateCursorSize, 100);
-            });
+        if (cursor && heroSection) {
             window.addEventListener('mousemove', e => {
                 cursor.style.left = e.clientX + 'px';
                 cursor.style.top = e.clientY + 'px';
             });
+            heroSection.addEventListener('mouseenter', () => {
+                cursor.style.display = 'block';
+            });
+            heroSection.addEventListener('mouseleave', () => {
+                cursor.style.display = 'none';
+            });
             document.querySelectorAll('.hero-section-background a').forEach(link => {
                 link.addEventListener('mouseenter', () => {
-                    cursor.style.display = 'block';
-                    cursor.classList.add('pulsing');
+                    cursor.classList.add('hover-effect');
                 });
                 link.addEventListener('mouseleave', () => {
-                    cursor.style.display = 'none';
-                    cursor.classList.remove('pulsing');
+                    cursor.classList.remove('hover-effect');
                 });
             });
         }
