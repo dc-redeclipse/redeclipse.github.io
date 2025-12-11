@@ -45,3 +45,9 @@ From the command line:
 
 ## If you get stuck
 Don't panic! If you have trouble working out how to install and run the game, you can get assistance on our [Discord](/discord) or [Discussions](/discuss). Please be ready to provide as much information as possible, especially what operating system you're on and specifically which package you're trying to install!
+
+## Important Notice About Unofficial Packages
+Red Eclipse is available only through the official installation methods described on this page or via **[Steam](/steam)**.
+Packages found on Flathub, Snap, Flatpak, AUR, Linux distribution repositories, the Ubuntu Software Store, or any other third-party source are not official, not maintained, and not supported by the Red Eclipse development team.h
+These unofficial packages may be outdated, incomplete, or insecure, and can cause issues that we cannot assist with.
+For the best experience and to ensure you're receiving verified, up-to-date builds, please install Red Eclipse exclusively through the official methods provided here or via **[Steam](/steam)**.
