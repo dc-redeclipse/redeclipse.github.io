@@ -1,6 +1,9 @@
-version: "2.1.0"
-release: "Big Bang Edition"
+version: "2.0.9"
+release: "Big Bang Beta"
 date: "24th December 2025"
+#version: "2.1.0"
+#release: "Big Bang Edition"
+#date: "24th December 2026"
 youtube: p7w4LXJ_JJ8
 copyright: "Quinton Reeves, Lee Salzman"
 screenshots:

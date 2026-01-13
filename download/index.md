@@ -7,7 +7,6 @@ redirect_from:
 ---
 
 # v{{ site.data.game.version }} ({{ site.data.game.release }})
-### Released {{ site.data.game.date }}
 <p style="text-align: margin: 2em 0;">
   <a href="/steam" style="display: inline-block; padding: 15px 30px; font-size: 2.5em; font-weight: bold; color: #fff; background-color: #910000; text-decoration: none; border-radius: 40px; border-bottom: 5px solid #1b2838;">
     <span class="fab fa-steam" style="--fa-animation-duration: 2s; margin-right: 10px;"></span>Install with Steam
@@ -27,7 +26,7 @@ Platform                                                             | Downloads
 **[Installation Help](/docs/Install-Guide)**
 
 ### System Requirements
-Red Eclipse requires a fairly modern graphics card to run, but is otherwise quite tolerant of hardware specifications. If you find you can't run the game due to insufficient hardware, you might want to try the [old unsupported Version of Red Eclipse v1.6](https://github.com/redeclipse/base/releases/tag/v1.6.0) which runs on Cube Engine 2 alone without the modern renderer from Tesseract.
+Red Eclipse requires a fairly modern graphics card to run, but is otherwise quite tolerant of hardware specifications. If you find you can't run the game due to insufficient hardware, you might want to try the [old unsupported Version of Red Eclipse v1.6](https://github.com/redeclipse/base/releases/tag/v1.6.0) (Can also be installed via <span class="fab fa-steam" aria-hidden="true"></span> **[Steam](/steam)**) which runs on Cube Engine 2 alone without the modern renderer from Tesseract.
 
 #### MINIMUM
 * Processor: Intel Pentium Dual-Core E2180 / AMD Athlon 64 X2 4200+
