@@ -34,7 +34,6 @@ permalink: /servers/
 {% assign img_team_spectator = '/servers/team/spectator.png' %}
 {% assign img_location = '/servers/icons/location.png' %}
 {% assign img_info = '/servers/icons/info.png' %}
-{% assign img_alert = '/servers/icons/alert.png' %}
 {% assign img_settings = '/servers/icons/settings.png' %}
 
 {% assign steam_link = 'steam://run/967460' %}
@@ -443,15 +442,6 @@ permalink: /servers/
 {% if current_players == 0 %}
   {% assign time_title_text_final = 'Waiting for players' %}
 {% endif %}
-                <div class="time-left-container timeleft-hover-help{% if current_players == 0 %} waiting{% endif %}" title="{{ time_title_text_final }}" style="color:#fff; font-weight: bold; font-size: 1em; margin-top: 3px; margin-bottom: 2px; display: block;">
-                    {% if current_players == 0 %}
-                      <img src="{{ img_waiting }}" alt="Waiting" style="height:1.1em;vertical-align:middle;margin-right:5px;">Waiting for players
-                    {% else %}
-                      <img src="{{ img_waiting }}" alt="Waiting" style="height:1.1em;vertical-align:middle;margin-right:5px;">{% if total_seconds == -1 %}No time limit
-                      {% else %}{% if hours > 0 %}{{ hours }}h {% endif %}{{ minutes }}m {{ seconds }}s
-                      {% endif %}
-                    {% endif %}
-                </div>
             </td>
 
             <td class="server-details-cell" style="min-width: 250px;">
