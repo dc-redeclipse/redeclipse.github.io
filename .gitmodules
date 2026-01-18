@@ -3,5 +3,5 @@
 	url = https://github.com/redeclipse/www-bits.git
 
 [submodule "maps"]
-    path = maps
-    url = https://github.com/redeclipse/maps.git
+	path = maps
+	url = https://github.com/redeclipse/maps.git
