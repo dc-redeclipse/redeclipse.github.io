@@ -51,6 +51,34 @@ MAPS_FILE = DATA_DIR / 'maps.json'
 NOTIFY_FILE = 'notify.json'
 IP_CACHE_FILE = DATA_DIR / 'ip.json'
 
+# Game state mapping
+STATE_IDLE = 0
+STATE_INITIALISING = 3
+STATE_PLAY = 5
+STATE_VOTE = 8
+
+STATE_FALLBACK = STATE_PLAY
+
+STATE_MAP = {
+    STATE_IDLE: "idle",
+    STATE_INITIALISING: "initialising",
+    STATE_PLAY: "play",
+    STATE_VOTE: "vote"
+}
+
+# Platform mapping
+PLATFORM_WIN = 0
+PLATFORM_MAC = 1
+PLATFORM_UNIX = 2
+
+PLATFORM_FALLBACK = PLATFORM_UNIX
+
+PLATFORM_MAP = {
+    PLATFORM_WIN: "win",
+    PLATFORM_MAC: "mac",
+    PLATFORM_UNIX: "unix"
+}
+
 # Global cache for IP lookups
 IP_CACHE = {}
 # Global args for debug printing
@@ -132,8 +160,8 @@ CUBE2_UNICHARS = [
 Server = namedtuple('Server', ['ip', 'port', 'name', 'branch'])
 Player = namedtuple('Player', ['inputpos', 'name', 'raw_name', 'privilege'])
 Status = namedtuple('Status', ['clients', 'max_clients', 'map_name', 'game_mode', 'master_mode',
-                               'time_left', 'mutators', 'version', 'branch', 'major_version',
-                               'minor_version', 'patch_version', 'players', 'raw_response'])
+                             'time_remaining', 'time_left', 'mutators', 'vars', 'mods', 'version', 'branch', 'major_version',
+                             'minor_version', 'patch_version', 'platform', 'arch', 'state', 'players', 'raw_response'])
 
 COLOR_PATTERN = re.compile(r'\f[a-zA-Z0-9\[\]]')
 PRIV_PATTERN = re.compile(r'\$priv([a-z]+)tex')
@@ -402,8 +430,6 @@ def ip_to_country(ip):
     if ip in IP_CACHE:
         return IP_CACHE[ip]
     try:
-        # Sleep for 1.5 seconds only when querying new IPs to respect the 45 req/min limit
-        time.sleep(1.5)
         with urllib.request.urlopen(f"http://ip-api.com/json/{ip}?fields=country", timeout=3.0) as r:
             data = json.load(r)
             country = data.get('country', 'Unknown')
@@ -414,6 +440,18 @@ def ip_to_country(ip):
         if ARGS and ARGS.debug:
             print(f"[Warning] Geo-IP lookup failed for {ip}: {e}")
     return 'Unknown'
+
+def map_state_to_label(state_code):
+    try:
+        return STATE_MAP.get(int(state_code), STATE_MAP.get(STATE_FALLBACK, "play"))
+    except Exception:
+        return STATE_MAP.get(STATE_FALLBACK, "play")
+
+def map_platform_to_label(platform_code):
+    try:
+        return PLATFORM_MAP.get(int(platform_code), PLATFORM_MAP.get(PLATFORM_FALLBACK, "unix"))
+    except Exception:
+        return PLATFORM_MAP.get(PLATFORM_FALLBACK, "unix")
 
 # ==========================================
 #                PROTOCOL HANDLING
@@ -490,19 +528,30 @@ def fetch_server_status(ip, port, debug=False):
             version = stream.read_int("Protocol")
             g_mode_c = stream.read_int("Game Mode")
             muts = stream.read_int("Mutators")
-            tl = stream.read_int("Time Left")
+            tr = stream.read_int("Time Remaining")
             mc = stream.read_int("Max Clients")
             mm_c = stream.read_int("Master Mode")
-            stream.read_int("Vars")
-            stream.read_int("Mods")
+            vars = stream.read_int("Vars")
+            mods = stream.read_int("Mods")
             
             # --- Parse extras ---
             int_count -= 8
             maj, minr, pat = 0, 0, 0
+            platform = arch = state = time_left_var = 0
             if version >= 226:
-                maj, minr, pat = stream.read_int("Maj"), stream.read_int("Min"), stream.read_int("Pat")
+                maj = stream.read_int("Maj")
+                minr = stream.read_int("Min")
+                pat = stream.read_int("Pat")
                 int_count -= 3
-            for _ in range(int_count): stream.read_int("Extra")
+                # Read additional vars in order
+                platform = stream.read_int("Platform")
+                arch = stream.read_int("Arch")
+                state = stream.read_int("State")
+                time_left_var = stream.read_int("Time Left")
+                int_count -= 4
+            # Consume any remaining extras if present
+            for _ in range(max(0, int_count)):
+                stream.read_int("Extra")
             
             # --- Parse strings ---
             m_name = stream.read_string("Map")
@@ -528,10 +577,13 @@ def fetch_server_status(ip, port, debug=False):
                 print(hexdump(data))
                 print("-" * 50)
 
+            # Choose correct time-left depending on protocol
+            effective_time_left = time_left_var if version >= 226 else tr
+
             return Status(clients, mc, uncolor_string(m_name),
                           GAME_MODES[g_mode_c] if 0 <= g_mode_c < len(GAME_MODES) else "unknown",
                           MASTER_MODES[mm_c] if 0 <= mm_c < len(MASTER_MODES) else "unknown",
-                          tl, muts, version, br, maj, minr, pat, players, data)
+                          tr, effective_time_left, muts, vars, mods, version, br, maj, minr, pat, platform, arch, state, players, data)
     except Exception:
         return None
 
@@ -541,8 +593,12 @@ def process_server_data(server, debug=False):
         "name": server.name, "ip_port": f"{server.ip}:{server.port}", "protocol": 0,
         "version_major": 0, "version_minor": 0, "version_patch": 0, "version_full": "N/A",
         "players": 0, "max_players": 0, "map": "Offline/Unknown", "gamemode": "UNKNOWN",
-        "mastermode": "UNKNOWN", "time_left_seconds": -1, "time_left_formatted": "N/A",
-        "mutators": [], "branch": server.branch, "location": "Unknown", "player_list_data": []
+        "mastermode": "UNKNOWN", "timeremaining_seconds": -1, "timeremaining_formatted": "N/A",
+        "mutators": [],
+        "vars": 0,
+        "mods": 0,
+        "platform": "unix", "arch": 0, "state": "play", "timeleft": -1,
+        "branch": server.branch, "location": "Unknown", "player_list_data": []
     }
     
     if status:
@@ -598,7 +654,6 @@ def process_server_data(server, debug=False):
                     final_team_hex, final_team_int = "#3030f0", 0x3030F0
                     final_css = generate_css_filter(final_team_hex)
                     team_val = "alpha"
-            
             p_list.append({
                 "name": p.name, "privilege": p.privilege, "raw_name": p.raw_name,
                 "raw_player_int": p_int, "player_color_hex": p_hex, "player_color_css": final_css,
@@ -611,9 +666,15 @@ def process_server_data(server, debug=False):
             "version_minor": status.minor_version, "version_patch": status.patch_version,
             "version_full": v_full, "players": status.clients, "max_players": status.max_clients,
             "map": status.map_name, "gamemode": status.game_mode.upper(), "mastermode": status.master_mode,
-            "time_left_seconds": status.time_left,
-            "time_left_formatted": time.strftime('%H:%M:%S', time.gmtime(max(0, status.time_left))),
+            "timeremaining_seconds": status.time_remaining,
+            "timeremaining_formatted": time.strftime('%H:%M:%S', time.gmtime(max(0, status.time_remaining))),
             "mutators": get_mutator_names(status.mutators, status.game_mode),
+            "vars": status.vars,
+            "mods": status.mods,
+            "platform": map_platform_to_label(status.platform),
+            "arch": status.arch,
+            "state": map_state_to_label(status.state),
+            "timeleft": status.time_left,
             "branch": status.branch or server.branch, "player_list_data": p_list
         })
     

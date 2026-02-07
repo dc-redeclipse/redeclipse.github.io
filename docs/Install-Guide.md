@@ -15,7 +15,7 @@ redirect_from:
 - Follow the installation prompts.
 - You can now access Red Eclipse from your start menu.
 
-If you get a permission denied error during install, right click the installer and [Run as Administrator](http://windows.microsoft.com/en-us/windows7/how-do-i-run-an-application-once-with-a-full-administrator-access-token). Alternatively, you can change the install location to a user-writable folder (like "[My] Documents") during the install process.
+If you get a permission denied error during install, right click the installer and Run as Administrator. Alternatively, you can change the install location to a user-writable folder (like "[My] Documents") during the install process.
 
 ## GNU/Linux or BSD
 ### AppImage

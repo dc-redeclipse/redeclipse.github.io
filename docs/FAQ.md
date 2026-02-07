@@ -11,7 +11,7 @@ redirect_from:
 {:toc}
 ## What operating systems are supported?
 
-Red Eclipse can be played under Windows XP/Vista/7/8.1/10, macOS, GNU/Linux and BSD.
+Red Eclipse can be played under Windows XP/Vista/7/8.1/10/11, macOS, GNU/Linux and BSD.
 
 ## How long has the game been in development?
 
@@ -19,6 +19,7 @@ Red Eclipse was branched from the now-defunct [Blood Frontier](https://sourcefor
 
 ## Where can I get the game?
 
+The best way to play Red Eclipse is by downloading it through <span class="fab fa-steam" aria-hidden="true"></span> **[Steam](/steam)**.
 Red Eclipse is available for download at no cost.
 
 - The [latest release](/download) can be downloaded for all supported operating systems.
@@ -26,7 +27,6 @@ Red Eclipse is available for download at no cost.
     - [Debian](Install-Guide#debian/ubuntu_repository)
     - [Ubuntu](Install-Guide#debian/ubuntu_repository)
     - [AUR](https://aur.archlinux.org/packages/redeclipse)
-    - [Chakra](https://chakralinux.org/ccr/packages.php?O=0&K=redeclipse&do_Search=+Go+)
 - BSD ports are available for:
     - [FreeBSD](https://www.freshports.org/games/redeclipse/)
     - [OpenBSD](http://ports.su/games/redeclipse,-main)
@@ -91,7 +91,7 @@ Technical problems can be reported in the [discussion area](/discuss). Evident b
 
 ## Red Eclipse fails with 'OpenGL 2.0 or greater is required!', but I have 2.0 or greater.
 
-On Windows, when Red Eclipse detects the renderer as 'GDI Generic' it will report a much lower GL version. This has been resolved by removing [config.cfg](Game-Settings#config.cfg) and [init.cfg](Game-Settings#init.cfg) to reset game settings.
+On Windows, when Red Eclipse detects the renderer as 'GDI Generic' it will report a much lower GL version. This has been resolved by removing config.cfg and init.cfg to reset game settings.
 
 ## Can I contribute to the game?
 

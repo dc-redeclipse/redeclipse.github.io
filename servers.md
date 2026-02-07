@@ -14,6 +14,7 @@ permalink: /servers/
 {% assign img_master_password = '/servers/mastermode/locked.png' %}
 {% assign img_master_unknown = '/servers/mastermode/unknown.png' %}
 {% assign img_version_icon = '/servers/icons/icon.png' %}
+{% assign img_vote = '/servers/icons/vote.png' %}
 {% assign img_fallback_map = '/bits/bg2.jpg' %}
 {% assign img_question_mark = '/servers/icons/question.png' %}
 {% assign img_waiting = '/servers/icons/waiting.png' %}
@@ -363,7 +364,7 @@ permalink: /servers/
                 {%- if display_branch == '?' or display_branch == '' -%}
                   {%- assign display_branch = 'unknown' -%}
                 {%- endif -%}
-                {%- assign tooltip_text = 'Branch: ' | append: display_branch | append: ', Protocol: ' | append: server.protocol -%}
+                {%- assign tooltip_text = 'Version: ' | append: server.version_full | append: '-' | append: server.platform | append: server.arch | append: '-' | append: display_branch | append: '; Protocol: ' | append: server.protocol -%}
                 <div class="version-display-stacked version-hover-help" title="{{ tooltip_text }}">
                     <img src="{{ img_version_icon }}" alt="Version Icon" style="display:block; margin:auto; height:2.2em; margin-bottom: 4px;">
                     {% if is_outdated %}
@@ -438,15 +439,86 @@ permalink: /servers/
                     </div>
                   {% endif %}
                 {% endif %}
-{% assign time_title_text_final = time_title_text %}
-{% if current_players == 0 %}
-  {% assign time_title_text_final = 'Waiting for players' %}
+{% comment %}
+  Format time left display from seconds.
+{% endcomment %}
+{% assign total_seconds = server.timeremaining_seconds | plus: 0 %}
+{% assign hours = total_seconds | divided_by: 3600 %}
+{% assign minutes = total_seconds | modulo: 3600 | divided_by: 60 %}
+{% assign seconds = total_seconds | modulo: 60 %}
+
+{% assign server_state = server.state | default: '' | downcase | strip %}
+
+{% comment %}
+  Build title text or No time limit.
+{% endcomment %}
+{% if total_seconds == -1 %}
+  {% assign time_title_text = 'No time limit' %}
+{% else %}
+  {% capture computed_time %}{% if hours > 0 %}{{ hours }}h {% endif %}{{ minutes }}m {{ seconds }}s{% endcapture %}
+  {% assign time_title_text = 'Ends in' %}
 {% endif %}
+
+{% if server_state == 'initialising' %}
+  {% assign time_title_text = 'Initialising' %}
+{% elsif server_state == 'vote' %}
+  {% assign time_title_text = 'Voting' %}
+{% endif %}
+
             </td>
 
             <td class="server-details-cell" style="min-width: 250px;">
 
-                <h3 class="server-name-title" title="{{ server.ip_port | escape }}" style="color:#fff;">{{ server.name | truncate: 46 | escape }}</h3>
+                {% comment %}
+                  Resolve vars/mods counts from server data.
+                {% endcomment %}
+                {% assign vars_count = server.vars_count | default: nil %}
+                {% if vars_count == nil or vars_count == '' %}
+                  {% assign vars_num = server.vars | plus: 0 %}
+                  {% assign vars_str = server.vars | append: '' | strip %}
+                  {% if vars_str == '' %}
+                    {% assign vars_count = 0 %}
+                  {% elsif vars_num > 0 or vars_str == '0' %}
+                    {% assign vars_count = vars_num %}
+                  {% else %}
+                    {% assign vars_clean = vars_str | remove: '[' | remove: ']' | remove: '"' %}
+                    {% assign vars_items = vars_clean | split: ',' %}
+                    {% assign vars_count = 0 %}
+                    {% for it in vars_items %}
+                      {% assign t = it | strip %}
+                      {% if t != '' %}
+                        {% assign vars_count = vars_count | plus: 1 %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% else %}
+                  {% assign vars_count = vars_count | plus: 0 %}
+                {% endif %}
+
+                {% assign mods_count = server.mods_count | default: nil %}
+                {% if mods_count == nil or mods_count == '' %}
+                  {% assign mods_num = server.mods | plus: 0 %}
+                  {% assign mods_str = server.mods | append: '' | strip %}
+                  {% if mods_str == '' %}
+                    {% assign mods_count = 0 %}
+                  {% elsif mods_num > 0 or mods_str == '0' %}
+                    {% assign mods_count = mods_num %}
+                  {% else %}
+                    {% assign mods_clean = mods_str | remove: '[' | remove: ']' | remove: '"' %}
+                    {% assign mods_items = mods_clean | split: ',' %}
+                    {% assign mods_count = 0 %}
+                    {% for it2 in mods_items %}
+                      {% assign t2 = it2 | strip %}
+                      {% if t2 != '' %}
+                        {% assign mods_count = mods_count | plus: 1 %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% else %}
+                  {% assign mods_count = mods_count | plus: 0 %}
+                {% endif %}
+
+                <h3 class="server-name-title" title="{{ server.ip_port | escape }}&#10;{{ vars_count }} Variables {{ mods_count }}% modified" style="color:#fff;">{{ server.name | truncate: 46 | escape }}</h3>
 
                 <div class="server-location" title="Server location" style="margin-top: 0px; margin-bottom: 1px; color:#fff;">
                     <span class="location-hover-help" style="display:inline-flex;align-items:center;font-weight:bold;color:#fff;font-size:1.0em;">
@@ -455,9 +527,6 @@ permalink: /servers/
                     </span>
                 </div>
 
-                {% comment %}
-                  Title case gamemode with minor word exceptions.
-                {% endcomment %}
                 {% assign mode_words = server.gamemode | replace: '-', ' ' | strip | downcase | split: ' ' %}
                 {% assign minor_words = "a, an, the, and, but, or, for, nor, so, yet, as, at, by, for, in, of, off, on, per, to, up, with" | split: ', ' %}
                 {% assign final_mode_words = "" | split: '' %}
@@ -547,10 +616,12 @@ permalink: /servers/
                 {% comment %}
                   Format time left display from seconds.
                 {% endcomment %}
-                {% assign total_seconds = server.time_left_seconds | plus: 0 %}
+                {% assign total_seconds = server.timeremaining_seconds | plus: 0 %}
                 {% assign hours = total_seconds | divided_by: 3600 %}
                 {% assign minutes = total_seconds | modulo: 3600 | divided_by: 60 %}
                 {% assign seconds = total_seconds | modulo: 60 %}
+
+                {% assign server_state = server.state | default: '' | downcase | strip %}
 
                 {% comment %}
                   Build title text or No time limit.
@@ -562,12 +633,31 @@ permalink: /servers/
                   {% assign time_title_text = 'Ends in' %}
                 {% endif %}
 
+                {% if server_state == 'initialising' %}
+                  {% assign time_title_text = 'Initialising' %}
+                {% elsif server_state == 'vote' %}
+                  {% assign time_title_text = 'Voting' %}
+                {% endif %}
+
                 {% assign time_title_text_final = time_title_text %}
-{% if current_players == 0 %}
-  {% assign time_title_text_final = 'Waiting for players; Server is empty in idle' %}
-{% endif %}
-                <div class="time-left-container timeleft-hover-help{% if current_players == 0 %} waiting{% endif %}" title="{{ time_title_text_final }}" style="color:#fff; font-weight: bold; font-size: 1em; margin-top: 3px; margin-bottom: 2px; display: block;">
                     {% if current_players == 0 %}
+                {% assign time_title_text_final = 'Waiting for players; Server is empty in idle' %}
+                    {% endif %}
+                {% if server_state == 'initialising' %}
+                    {% assign time_title_text_final = 'Initialising next match' %}
+                {% elsif server_state == 'vote' %}
+                    {% assign time_title_text_final = 'Waiting for map suggestions' %}
+                {% elsif server_state == 'idle' %}
+                    {% assign time_title_text_final = 'Waiting for players; Server is empty in idle' %}
+                {% endif %}
+                <div class="time-left-container timeleft-hover-help{% if current_players == 0 %} waiting{% endif %}" title="{{ time_title_text_final }}" style="color:#fff; font-weight: bold; font-size: 1em; margin-top: 3px; margin-bottom: 2px; display: block;">
+                    {% if server_state == 'initialising' %}
+                      <img src="{{ img_settings }}" alt="Initialising" style="height:1.1em;vertical-align:middle;margin-right:5px;">Initialising
+                    {% elsif server_state == 'vote' %}
+                      <img src="{{ img_vote }}" alt="Voting" style="height:1.1em;vertical-align:middle;margin-right:5px;">Voting
+                    {% elsif server_state == 'idle' %}
+                      <img src="{{ img_waiting }}" alt="Waiting" style="height:1.1em;vertical-align:middle;margin-right:5px;">Waiting for players
+                    {% elsif current_players == 0 %}
                       <img src="{{ img_waiting }}" alt="Waiting" style="height:1.1em;vertical-align:middle;margin-right:5px;">Waiting for players
                     {% else %}
                       <img src="{{ img_waiting }}" alt="Waiting" style="height:1.1em;vertical-align:middle;margin-right:5px;">{% if total_seconds == -1 %}No time limit
@@ -790,15 +880,6 @@ permalink: /servers/
 </p>
 
 <style>
-/* 
-  Server browser styling and layout optimizations:
-  - Combined duplicated CSS selectors across media queries.
-  - Removed redundant properties like multiple 'overflow-x: auto' and 'max-width: none'.
-  - Grouped player count colors and text-shadow removals.
-  - Consolidated responsive rules for server details and active players.
-  - Kept all functional styles intact and enhanced clarity with comments.
-*/
-
 /* --- General Table Styling --- */
 #server-list {
     width: 100%;
@@ -839,7 +920,7 @@ permalink: /servers/
     padding-right: 5px;
     font-weight: bold;
     line-height: 1.2;
-    min-width: 82px; /* Minimum width for large screens */
+    min-width: 82px;
 }
 
 /* Set player numbers to the same font style; current keeps its color classes */
@@ -1345,7 +1426,6 @@ permalink: /servers/
     cursor: help;
     display: inline-flex;
     align-items: center;
-    margin: 0;
 }
 
 /* Game mode line */
@@ -1805,8 +1885,6 @@ permalink: /servers/
   align-items: center;
   gap: 6px;
 }
-
-/* Existing styles continue... */
 </style>
 
 <script>
@@ -1833,7 +1911,7 @@ function __updateLastCheckedTooltip() {
       var absDiff = Math.abs(offsetHours);
       var pad = function(n){ return n.toString().padStart(2, '0'); };
       var userTime = pad(clientDate.getHours())+":"+pad(clientDate.getMinutes())+":"+pad(clientDate.getSeconds());
-      var tooltip = titleBase + serverLocal + ' (Your Local-Time ' + userTime;
+      var tooltip = titleBase + serverLocal + '\n(Your Local-Time ' + userTime;
       if (absDiff >= 1) {
         tooltip += ' ' + sign + absDiff + 'h';
       }

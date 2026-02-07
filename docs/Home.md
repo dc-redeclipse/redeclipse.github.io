@@ -38,7 +38,6 @@ redirect_from:
 - **[Downloads](/download)** - Download the game and play it!
 - **[Discussion Area](/discuss)** - Talk with your fellow players and developers.
 - **[Discord Server](/discord)** - Join our Discord Server and hang out with the community.
-- **[Facebook Messenger](/messenger)** - Ask a quick question and we'll get back to you.
 - **[Issue Tracker](/issues)** - The place for bug reports and approved feature requests.
 - **[Contribution Guidelines](/contribute)** - See our rules and suggestions for contributing.
 - **[Official SubReddit](/reddit)** - The place to share with your fellow Reddit'ors.
@@ -46,4 +45,4 @@ redirect_from:
 - **[YouTube Page](/youtube)** - The place to see Red Eclipse related videos and live streams.
 - **[GitHub Project](/github)** - We do all our development on GitHub, so this is the place to start when developing.
 - **[Sponsor via Open Collective](/opencollective)** - Sponsor the project and help cover project costs.
-- **[Donate via PayPal](/paypal)** - Make a one-time or recurring donation to help cover project costs.
+- **[Donate via PayPal](/donate)** - Make a one-time or recurring donation to help cover project costs.
