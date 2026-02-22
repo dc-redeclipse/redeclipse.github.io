@@ -1,4 +1,4 @@
-name: Execute Server Script Loop
+name: Execute Server Polling Script
 
 on:
   schedule:
