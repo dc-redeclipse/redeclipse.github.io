@@ -35,8 +35,9 @@ If you get a permission denied error during install, right click the installer a
 ### From Source
 - Install additional dependencies to compile with:
     - Debian/Ubuntu: `sudo apt-get install libsdl2-mixer-dev libsdl2-image-dev libsdl2-dev libfreetype-dev libopenal-dev libsndfile-dev`
+    - macOS: `brew install sdl2 sdl2_image libsndfile openal-soft freetype`
 
-From the command line:
+Donwload and compile from the command line:
 - Clone the repository and its submodules with `git clone --recurse-submodules https://github.com/redeclipse/base`
 - Enter the working directory with `cd base`
 - Compile with `make -C src install -jN`, with `-jN` being set to the number of cores your CPU has (e.g. `-j4` for a quad core system)
